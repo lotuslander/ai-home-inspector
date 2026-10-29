@@ -1,0 +1,41 @@
+<view class="page {{fieldMode?'field-mode':''}}">
+  <view class="header">
+    <view class="greeting">{{greeting}}，{{user.name}} 👋</view>
+    <view class="proactive-tip">{{proactive}}</view>
+  </view>
+  <!-- 模式切换 -->
+  <view class="mode-switch">
+    <view class="mode-btn {{mode==='beginner'?'active':''}}" bindtap="setMode" data-mode="beginner">新手模式</view>
+    <view class="mode-btn {{mode==='pro'?'active':''}}" bindtap="setMode" data-mode="pro">老师傅模式</view>
+  </view>
+  <view class="card task-card" bindtap="onTaskCard">
+    <view class="title">{{hasTask?'继续验房':'开始验房'}}</view>
+    <view class="muted" wx:if="{{hasTask}}">{{task.community}} {{task.room}}</view>
+    <view class="progress-track" style="margin-top:16rpx;" wx:if="{{hasTask}}"><view class="progress-fill" style="width:{{progress}}%"></view></view>
+    <view class="muted" style="margin-top:8rpx;">已检 {{doneCount}}/{{totalCount}}</view>
+  </view>
+  <view class="card guide-card" wx:if="{{firstTime}}">
+    <view class="guide-title">🆕 新手三步上手</view>
+    <view class="guide-step"><view class="gs-num">1</view><view class="gs-text">新建任务：点上方卡片，输入小区和房号</view></view>
+    <view class="guide-step"><view class="gs-num">2</view><view class="gs-text">逐项检测：按类别打勾，带📏的项可输入实测数值自动判定</view></view>
+    <view class="guide-step"><view class="gs-num">3</view><view class="gs-text">出报告：签名 → AI结论 → 保存/导出，发给业主</view></view>
+  </view>
+  <view class="grid">
+    <view class="grid-item" bindtap="goChecklist"><view class="g-icon">📋</view><view>清单</view></view>
+    <view class="grid-item" bindtap="goReport"><view class="g-icon">📄</view><view>报告</view></view>
+    <view class="grid-item" bindtap="goHistory"><view class="g-icon">🗂️</view><view>历史</view></view>
+    <view class="grid-item" bindtap="goClients"><view class="g-icon">👥</view><view>客户</view></view>
+    <view class="grid-item" bindtap="goTools"><view class="g-icon">🧰</view><view>工具</view></view>
+    <view class="grid-item" bindtap="goCases"><view class="g-icon">🎓</view><view>案例</view></view>
+    <view class="grid-item" bindtap="goVoice"><view class="g-icon">🎙️</view><view>语音记录</view></view>
+  </view>
+  <view class="card" wx:if="{{unfinished.length}}">
+    <view class="sub-title">📌 未完成的验房</view>
+    <view class="row-between" style="padding:16rpx 0;" wx:for="{{unfinished}}" wx:key="index" data-community="{{item.community}}" data-room="{{item.room}}" bindtap="resumeTask">
+      <view>{{item.community}} {{item.room}}<view class="muted">已检 {{item.done}} 项 · {{item.date}}</view></view>
+      <view class="tag tag-info">继续 ›</view>
+    </view>
+  </view>
+  <view class="card" wx:if="{{pendingFix>0}}" bindtap="goRecheck"><view class="row-between"><view>🔁 整改跟踪</view><view class="tag tag-bad">{{pendingFix}}待复检</view></view></view>
+</view>
+

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "语音引擎配置",
+  "usingComponents": {
+    "global-tabbar": "/components/global-tabbar/global-tabbar"
+  }
+}

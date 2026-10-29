@@ -1,0 +1,11 @@
+<view class="page">
+  <view class="tip">选择一个大模型填入你自己的API Key。推荐第一个（通义千问，带看图）。</view>
+  <view class="card" wx:for="{{models}}" wx:key="id" data-id="{{item.id}}" bindtap="tapModel">
+    <view class="row">
+      <view class="name">{{item.name}}</view>
+      <view class="badge {{item.configured?'on':''}}">{{item.configured?'已配置':'未配置'}}</view>
+    </view>
+    <view class="desc">{{item.desc}}</view>
+  </view>
+</view>
+<global-tabbar/>

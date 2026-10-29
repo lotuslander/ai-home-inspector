@@ -1,0 +1,39 @@
+.sub-title{font-weight:700;margin-bottom:12rpx;}
+.inspector{text-align:center;flex-shrink:0;}
+.insp-avatar{width:88rpx;height:88rpx;border-radius:50%;background:#007AFF;color:#fff;display:flex;align-items:center;justify-content:center;font-size:40rpx;font-weight:700;margin:0 auto 8rpx;}
+.insp-name{font-size:26rpx;font-weight:600;}
+.insp-sub{font-size:22rpx;color:#8E8E93;}
+.insp-cert{font-size:20rpx;color:#007AFF;margin-top:4rpx;}
+.sig-img{width:240rpx;height:120rpx;margin-top:12rpx;}
+.report-canvas{position:fixed;bottom:0;right:0;opacity:0;pointer-events:none;width:720rpx;height:1200rpx;}
+.btn-grid{display:flex;flex-wrap:wrap;gap:16rpx;padding:0 16rpx;}
+.btn-grid .btn-ghost,.btn-grid .btn-primary{flex:1 1 calc(50% - 8rpx);box-sizing:border-box;}
+.share-tip{text-align:center;color:#8E8E93;font-size:22rpx;padding:12rpx 0 30rpx;}
+.ai-text{font-size:27rpx;line-height:1.6;color:#3C3C43;background:#F2F2F7;padding:16rpx;border-radius:12rpx;}
+.ai-btn{background:#E5F0FF;color:#007AFF;text-align:center;padding:18rpx;border-radius:12rpx;font-weight:600;}
+.fix-btn{margin-top:16rpx;background:#E8F5EC;color:#34C759;text-align:center;padding:18rpx;border-radius:12rpx;font-weight:600;}
+.prob{padding:16rpx 0;border-bottom:1rpx solid #E5E5EA;}
+.prob-name{font-weight:600;}
+.prob-type{font-size:21rpx;padding:2rpx 10rpx;border-radius:6rpx;font-weight:500;}
+.prob-type.t-bad{background:#FFEBEB;color:#FF3B30;}
+.prob-type.t-mid{background:#FFF4E5;color:#FF9500;}
+.prob-photos{display:flex;flex-wrap:wrap;gap:10rpx;margin-top:10rpx;}
+.prob-photo{width:140rpx;height:140rpx;border-radius:10rpx;}
+.photo-time{width:100%;font-size:20rpx;color:#8E8E93;margin-top:4rpx;}
+.tag{display:inline-block;font-size:21rpx;padding:4rpx 14rpx;border-radius:8rpx;}
+.tag-bad{background:#FFEBEB;color:#FF3B30;}
+.tag-ok{background:#E8F5EC;color:#34C759;}
+.tag-warn{background:#FFF4E5;color:#FF9500;}
+.tag-info{background:#E5F0FF;color:#007AFF;}
+.unchecked-chips{display:flex;flex-wrap:wrap;gap:12rpx;}
+.uc-chip{padding:10rpx 20rpx;background:#F2F2F7;border-radius:30rpx;font-size:24rpx;color:#3C3C43;}
+.uc-chip.on{background:#FF9500;color:#fff;}
+.ins-item{padding:12rpx 0;border-bottom:1rpx solid #F2F2F7;}
+.ins-name{font-size:26rpx;font-weight:600;margin-right:16rpx;}
+.ins-desc{font-size:24rpx;color:#8E8E93;}
+.grade-bar{margin-top:20rpx;border-radius:12rpx;padding:18rpx 22rpx;}
+.grade-lbl{font-size:28rpx;font-weight:700;}
+.grade-desc{font-size:24rpx;color:#3C3C43;margin-top:8rpx;line-height:1.6;}
+.grade-reasons{margin-top:8rpx;}
+.gr-item{font-size:23rpx;color:#007AFF;line-height:1.7;}
+.grade-fix{font-size:23rpx;color:#8E8E93;margin-top:8rpx;}

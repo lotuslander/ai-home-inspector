@@ -1,0 +1,34 @@
+.tab-wrap { position: fixed; left: 0; right: 0; bottom: 0; z-index: 998; }
+.tabbar { display: flex; background: rgba(255,255,255,0.85); backdrop-filter: blur(24rpx); -webkit-backdrop-filter: blur(24rpx); border-top: 0.5rpx solid rgba(0,0,0,0.06); padding: 10rpx 0 calc(10rpx + env(safe-area-inset-bottom)); position: relative; }
+.tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100rpx; }
+.tab-icon { width: 56rpx; height: 56rpx; }
+.tab-text { font-size: 26rpx; color: #8E8E93; margin-top: 6rpx; font-weight: 500; }
+.tab.active .tab-text { color: #007AFF; font-weight: 600; }
+
+/* 中间AI气泡：凸起圆形玻璃质感 */
+.tab-bubble { flex: 1; display: flex; align-items: flex-start; justify-content: center; height: 100rpx; }
+.bubble { width: 112rpx; height: 112rpx; border-radius: 50%; margin-top: -58rpx;
+  background: linear-gradient(150deg, #6BB5FF 0%, #007AFF 55%, #0062CC 100%);
+  box-shadow: 0 10rpx 28rpx rgba(0, 122, 255, 0.38), inset 0 3rpx 6rpx rgba(255,255,255,0.45), inset 0 -6rpx 12rpx rgba(0,0,0,0.12);
+  border: 4rpx solid rgba(255,255,255,0.65);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.bubble-house { width: 46rpx; height: 46rpx; filter: drop-shadow(0 2rpx 3rpx rgba(0,0,0,0.25)); }
+.bubble-ai { font-size: 22rpx; font-weight: 800; color: #fff; letter-spacing: 2rpx; margin-top: 2rpx; text-shadow: 0 1rpx 2rpx rgba(0,0,0,0.3); }
+
+/* AI面板（悬浮层） */
+.fab-mask { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.35); z-index: 999; }
+.fab-panel { position: fixed; left: 24rpx; right: 24rpx; bottom: calc(180rpx + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.96); backdrop-filter: blur(30rpx); border-radius: 28rpx; padding: 28rpx; z-index: 1000; box-shadow: 0 -8rpx 40rpx rgba(0,0,0,0.12); }
+.fab-title { font-size: 30rpx; font-weight: 700; margin-bottom: 18rpx; }
+.fab-msgs { max-height: 420rpx; margin-bottom: 18rpx; }
+.fab-msg { font-size: 26rpx; line-height: 1.6; padding: 14rpx 20rpx; border-radius: 16rpx; margin-bottom: 12rpx; max-width: 92%; }
+.fab-msg.user { background: #007AFF; color: #fff; margin-left: auto; border-bottom-right-radius: 6rpx; }
+.fab-msg.ai { background: #F2F2F7; color: #1C1C1E; margin-right: auto; border-bottom-left-radius: 6rpx; }
+.fab-norm-link { margin-top: 10rpx; font-size: 22rpx; color: #007AFF; background: #E9F2FF; padding: 8rpx 16rpx; border-radius: 14rpx; display: inline-block; }
+.fab-chips { display: flex; flex-wrap: wrap; gap: 12rpx; margin-bottom: 18rpx; }
+.fab-chip { font-size: 24rpx; color: #007AFF; background: #E9F2FF; padding: 10rpx 24rpx; border-radius: 26rpx; }
+.fab-input-row { display: flex; align-items: center; gap: 12rpx; }
+.fab-voice { width: 72rpx; height: 72rpx; border-radius: 50%; background: #F2F2F7; display: flex; align-items: center; justify-content: center; font-size: 34rpx; flex-shrink: 0; }
+.fab-voice-hold { border: 2rpx solid transparent; }
+.fab-voice-hold.hold-on { background: #FF9500; border-color: #FF9500; transform: scale(1.15); }
+.fab-input { flex: 1; background: #F2F2F7; border-radius: 36rpx; padding: 16rpx 28rpx; font-size: 28rpx; }
+.fab-send { font-size: 28rpx; color: #fff; background: #007AFF; padding: 14rpx 32rpx; border-radius: 36rpx; font-weight: 600; flex-shrink: 0; }

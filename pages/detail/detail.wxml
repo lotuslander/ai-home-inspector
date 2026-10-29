@@ -1,0 +1,51 @@
+<view class="page {{fieldMode?'field-mode':''}}" wx:if="{{item}}">
+  <view class="card"><view class="title">{{item.name}}</view><view class="row-between"><view class="muted">{{categoryName}}</view><view class="tag {{item.risk==='high'?'tag-bad':item.risk==='mid'?'tag-warn':'tag-ok'}}">{{item.risk==='high'?'高风险':item.risk==='mid'?'中风险':'低风险'}}</view></view></view>
+  <view class="card"><view class="sub-title">📏 验收标准</view><view>{{item.standard}}</view></view>
+  <view class="card"><view class="sub-title">🧰 怎么测（工具教程）</view><view>{{item.method}}</view>
+    <view class="pro-method" wx:if="{{proMethod}}">
+      <view class="pm-row"><text class="pm-lbl">工具</text><text class="pm-val">{{proMethod.tool}}</text></view>
+      <view class="pm-row"><text class="pm-lbl">方法</text><text class="pm-val">{{proMethod.method}}</text></view>
+      <view class="pm-row"><text class="pm-lbl">合格线</text><text class="pm-val" style="color:#34C759;">{{proMethod.pass}}</text></view>
+    </view>
+    <view class="ai-btn" style="margin-top:12rpx;background:#F0F7FF;color:#007AFF;" bindtap="showToolTip">📹 查看工具使用教程</view></view>
+  <view class="card"><view class="sub-title">⚠️ 常见缺陷</view><view>{{item.defects}}</view></view>
+  <view class="card"><view class="sub-title">🔧 整改建议</view><view>{{item.fix}}</view></view>
+  <view class="card">
+    <view class="sub-title">📍 位置</view>
+    <view class="loc-chips">
+      <view class="loc-chip" wx:for="{{rooms}}" wx:key="*this" data-room="{{item}}" bindtap="quickLoc2">{{item}}</view>
+    </view>
+    <input placeholder="如：主卧东墙距地30cm" value="{{location}}" bindinput="onLocation"/>
+    <view class="sub-title" style="margin-top:16rpx;">📊 仪器数据</view>
+    <view class="metric-row" wx:if="{{item.metrics}}">
+      <view class="measure-btn" bindtap="measure">📏 测一测</view>
+    </view>
+    <input placeholder="如：空鼓20×30cm" value="{{instrument}}" bindinput="onInstrument"/>
+    <view class="metric-tip" wx:if="{{record.metricTip}}">📏 实测判定：{{record.metricTip}}{{record.metricValue?'（'+record.metricValue+'）':''}}</view>
+    <view class="sub-title" style="margin-top:16rpx;">📝 备注</view>
+    <view class="note-row">
+      <input class="note-input" placeholder="补充说明，点右侧话筒说话" value="{{note}}" bindinput="onNote"/>
+      <view class="mic-btn" bindtap="voiceInput">🎤</view>
+    </view>
+  </view>
+  <view class="card">
+    <view class="sub-title">📸 照片</view>
+    <view class="muted" style="font-size:22rpx;margin-bottom:8rpx;">建议：先拍远景定位（问题在哪面墙），再拍特写（问题细节）</view>
+    <view class="photos">
+      <image wx:for="{{photos}}" wx:key="*this" src="{{item}}" mode="aspectFill" class="photo"/>
+      <view class="photo add" bindtap="takePhoto">＋</view>
+    </view>
+    <view class="ai-btn" bindtap="aiVision">📷 AI看图找问题</view>
+    <view class="ai-btn" style="background:#F0FFF0;color:#34C759;" bindtap="autoDescribe">✍️ AI自动写描述</view>
+    <view class="ai-btn" style="background:#FFF8E6;color:#FF9500;" bindtap="autoRisk">⚠️ AI判断风险等级</view>
+    <view class="ai-btn" style="background:#FFF4E5;color:#FF9500;" bindtap="aiOwner">💬 AI教你怎么跟业主说</view>
+    <view class="ai-btn" style="background:#F2F7FF;color:#007AFF;" bindtap="similarCase">📚 类似案例参考</view>
+    <view class="owner-text" wx:if="{{ownerText}}">{{ownerText}}</view>
+  </view>
+  <view class="row-between" style="padding:0 16rpx;">
+    <view class="btn-ghost flex1" data-s="ok" bindtap="setStatus">✅ 合格</view>
+    <view class="btn-warn flex1" data-s="mid" bindtap="setStatus">⚠️ 临界</view>
+    <view class="btn-primary flex1" data-s="bad" bindtap="setStatus">🚩 问题</view>
+  </view>
+</view>
+<global-tabbar/>

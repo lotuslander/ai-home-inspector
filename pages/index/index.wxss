@@ -1,0 +1,18 @@
+.header { padding: 32rpx 28rpx 16rpx; }
+.greeting { font-size: 40rpx; font-weight: 700; }
+.proactive-tip { color: #007AFF; font-size: 26rpx; margin-top: 8rpx; }
+.task-card { background: #007AFF; color: #fff; }
+.task-card .title { color: #fff; }
+.task-card .muted { color: rgba(255,255,255,0.8); }
+.task-card .progress-track { background: rgba(255,255,255,0.3); }
+.task-card .progress-fill { background: #fff; }
+.grid { display: flex; flex-wrap: wrap; margin: 16rpx; }
+.grid-item { width: 25%; text-align: center; padding: 24rpx 0; }
+.g-icon { font-size: 48rpx; }
+.guide-card { background: linear-gradient(135deg, #E5F0FF, #F0E9FF); }
+.guide-title { font-weight: 700; font-size: 30rpx; margin-bottom: 16rpx; }
+.guide-step { display: flex; align-items: center; margin-top: 12rpx; }
+.gs-num { width: 40rpx; height: 40rpx; border-radius: 50%; background: #007AFF; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24rpx; font-weight: 700; flex-shrink: 0; }
+.gs-text { font-size: 27rpx; color: #3C3C43; margin-left: 16rpx; line-height: 1.5; }
+
+.mode-switch{display:flex;gap:16rpx;margin:16rpx;}.mode-btn{flex:1;padding:28rpx 0;text-align:center;border-radius:20rpx;background:#f5f5f7;font-size:28rpx;color:#666;}.mode-btn.active{background:#007AFF;color:#fff;font-weight:600;}

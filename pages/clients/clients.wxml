@@ -1,0 +1,123 @@
+<view class="page">
+  <!-- 回访提醒：闭环客户的复购商机 -->
+  <view class="card follow-card" wx:if="{{followUpCount}}">
+    <view class="sub-title">🔔 回访提醒（{{followUpCount}}户待回访）</view>
+    <view class="muted" style="font-size:22rpx;">收房3个月=装修复检商机 · 1年=渗漏回访商机</view>
+    <view class="follow-row" wx:for="{{list}}" wx:key="name" wx:if="{{item.followUp.length}}">
+      <view class="follow-name">{{item.name}}{{item.isVip?' ⭐':''}} <text class="follow-room">{{item.community}} {{item.room}}</text></view>
+      <view class="follow-tag" wx:for="{{item.followUp}}" wx:for-item="f" wx:key="type">{{f.at.slice(5)}}·{{f.type}}</view>
+    </view>
+  </view>
+  <!-- 经营分析：月度/季度单量+转介绍+团单 -->
+  <view class="card" wx:if="{{biz && biz.totalReports}}">
+    <view class="sub-title">📈 经营分析</view>
+    <view class="biz-row">
+      <view class="biz-item"><view class="biz-num">{{biz.monthReports}}</view><view class="biz-lbl">本月单量</view></view>
+      <view class="biz-item"><view class="biz-num">{{biz.quarterReports}}</view><view class="biz-lbl">本季单量</view></view>
+      <view class="biz-item"><view class="biz-num">{{biz.refCount}}</view><view class="biz-lbl">转介绍户</view></view>
+      <view class="biz-item"><view class="biz-num">{{biz.teamCount}}</view><view class="biz-lbl">团单小区</view></view>
+    </view>
+    <view class="btn-ghost" style="margin-top:16rpx;text-align:center;" bindtap="genBizReport">📋 生成经营简报</view>
+    <view class="ref-row" wx:if="{{refRank.length}}">
+      <view class="muted" style="font-size:22rpx;margin-bottom:8rpx;">🏆 转介绍人排行（谁给你带来最多客户）</view>
+      <view class="ref-item" wx:for="{{refRank}}" wx:key="name">{{index===0?'🥇':(index===1?'🥈':(index===2?'🥉':'·'))}} {{item.name}} · 带来{{item.count}}户</view>
+    </view>
+  </view>
+  <!-- 小区聚合：团单机会一眼可见 -->
+  <view class="card" wx:if="{{commCount}}">
+    <view class="sub-title">🏘️ 小区聚合（团单机会）</view>
+    <view class="comm-row" wx:for="{{commList}}" wx:key="community">
+      <view class="comm-name">{{item.community}}</view>
+      <view class="comm-meta">{{item.clients}}户 · {{item.reports}}份</view>
+      <view class="comm-pend comm-ok" wx:if="{{item.quality}}" style="color:{{item.quality.color}};background:#F2F2F7;">{{item.quality.label}}</view>
+      <view class="comm-pend" wx:if="{{item.pending>0}}">{{item.pending}}待复检</view>
+      <view class="comm-pend comm-ok" wx:elif="{{!item.quality && !item.pending}}">已闭环</view>
+    </view>
+    <view class="muted" style="margin-top:10rpx;font-size:22rpx;">🏢 质量画像=该盘多户报告评级均值，谈单和团单前先看它</view>
+  </view>
+  <view class="card c-card" wx:for="{{list}}" wx:key="name" data-idx="{{index}}" bindtap="viewClient">
+    <view class="row-between">
+      <view class="c-name">{{item.name}}{{item.isVip?' ⭐':''}}</view>
+      <view class="f-tag f-todo" wx:if="{{item.follow==='todo'}}">待跟进</view>
+      <view class="f-tag f-done" wx:elif="{{item.follow==='done'}}">已联系</view>
+      <view class="f-tag f-closed" wx:else>已闭环</view>
+    </view>
+    <view class="muted" wx:if="{{item.community}}">{{item.community}} {{item.room}}</view>
+    <view class="muted">{{item.reports}}份报告 · 最近 {{item.lastDate||'—'}}</view>
+    <view class="follow-tag" wx:for="{{item.followUp}}" wx:for-item="f" wx:key="type" wx:if="{{item.followUp.length}}">🔔 {{f.at.slice(5)}} {{f.type}}</view>
+    <view class="row-between" style="margin-top:16rpx;">
+      <view class="muted">
+        <text wx:if="{{item.pending>0}}" style="color:#FF3B30;">{{item.pending}}项待复检</text>
+        <text wx:else style="color:#34C759;">已闭环</text>
+        <text wx:if="{{item.note}}" style="color:#8E8E93;"> · 📝{{item.note}}</text>
+      </view>
+      <view class="call-btn" wx:if="{{item.phone}}" data-phone="{{item.phone}}" catchtap="call">拨打</view>
+    </view>
+  </view>
+  <view class="empty" wx:if="{{!list.length}}">还没有业主档案<br/><text class="muted">验房后业主会自动归档到这里</text></view>
+  <view class="btn-primary" style="margin:16rpx;" bindtap="add">＋ 添加业主</view>
+
+  <!-- 客户详情弹层 -->
+  <view class="mask" wx:if="{{showDetail}}" bindtap="closeDetail">
+    <view class="sheet" catchtap="noop">
+      <view class="row-between">
+        <view class="c-name">{{detail.name}}</view>
+        <view class="close-x" bindtap="closeDetail">✕</view>
+      </view>
+      <view class="muted" wx:if="{{detail.community}}">{{detail.community}} {{detail.room}}</view>
+      <view class="muted" wx:if="{{detail.phone}}">{{detail.phone}}</view>
+
+      <view class="row-between" style="margin-top:24rpx;">
+        <view class="s-card" bindtap="cycleFollow">
+          <view class="s-lbl">跟进状态</view>
+          <view class="s-val">
+            <text wx:if="{{detail.follow==='todo'}}" style="color:#FF9500;">● 待跟进</text>
+            <text wx:elif="{{detail.follow==='done'}}" style="color:#007AFF;">● 已联系</text>
+            <text wx:else style="color:#34C759;">● 已闭环</text>
+          </view>
+          <view class="s-hint">点击切换</view>
+        </view>
+        <view class="s-card">
+          <view class="s-lbl">待复检</view>
+          <view class="s-val" style="color:{{detail.pending>0?'#FF3B30':'#34C759'}};">{{detail.pending>0?detail.pending+'项':'无'}}</view>
+        </view>
+        <view class="s-card">
+          <view class="s-lbl">累计报告</view>
+          <view class="s-val">{{detail.reports}}份</view>
+        </view>
+      </view>
+
+      <view class="note-box" wx:if="{{detail.referrer}}">
+        <view class="s-lbl">🔗 转介绍来源</view>
+        <view class="muted">{{detail.referrer}}</view>
+      </view>
+
+      <view class="note-box" wx:if="{{detail.note}}">
+        <view class="s-lbl">📝 备注</view>
+        <view class="muted">{{detail.note}}</view>
+      </view>
+
+      <view class="note-box" wx:if="{{detail.followUp && detail.followUp.length}}">
+        <view class="s-lbl">🔔 回访计划（复购商机）</view>
+        <view class="muted" wx:for="{{detail.followUp}}" wx:for-item="f" wx:key="type">{{f.at}} · {{f.type}}</view>
+      </view>
+
+      <!-- 服务时间线：报告→整改→复检→闭环 -->
+      <view class="tl-box" wx:if="{{timeline.length}}">
+        <view class="s-lbl">🕐 服务时间线</view>
+        <view class="tl-item" wx:for="{{timeline}}" wx:key="index">
+          <view class="tl-dot {{item.type==='report'?'tl-dot-r':'tl-dot-g'}}"></view>
+          <view class="tl-body">
+            <view class="tl-text">{{item.text}}</view>
+            <view class="tl-date">{{item.date}}</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="btn-ghost" style="margin-top:24rpx;" bindtap="addNote">📝 编辑备注</view>
+      <view class="btn-ghost" style="margin-top:16rpx;" bindtap="addReferrer">🔗 记录转介绍来源</view>
+      <view class="btn-primary" style="margin-top:16rpx;" wx:if="{{detail.phone}}" data-phone="{{detail.phone}}" bindtap="call">📞 拨打业主电话</view>
+    </view>
+  </view>
+  <global-tabbar/>
+</view>

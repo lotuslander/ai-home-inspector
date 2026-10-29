@@ -1,0 +1,157 @@
+<view class="page" wx:if="{{report}}">
+  <!-- 报告头 -->
+  <view class="head">
+    <view class="h-title">验 房 报 告</view>
+    <view class="h-no">{{report.reportNo}} · {{report.date}}</view>
+    <view class="h-room">{{report.community}} {{report.room}}</view>
+  </view>
+  <!-- 一句话版：业主转述给家人/开发商 -->
+  <view class="card">
+    <view class="row-between">
+      <view class="sub-title">📌 一句话摘要</view>
+      <view class="copy-link" bindtap="copyOneLine">复制转发</view>
+    </view>
+    <view class="one-line">{{oneLine}}</view>
+  </view>
+  <!-- 阅读引导 -->
+  <view class="card">
+    <view class="sub-title">📖 如何看这份报告</view>
+    <view style="font-size:24rpx;line-height:1.8;color:#666;">
+      1. 先看"检测概况"了解整体情况<br/>
+      2. 重点看<span style="color:#FF3B30;">红色"问题"</span>和<span style="color:#FF9500;">橙色"关注"</span><br/>
+      3. 每个问题都有<span style="color:#007AFF;">整改建议</span>，可转发给开发商<br/>
+      4. 现场照片可点击放大看细节<br/>
+      5. 确认无误后点底部"手写签名确认"
+    </view>
+  </view>
+  <!-- 验房师 -->
+  <view class="card">
+    <view class="row-between">
+      <view>
+        <view class="sub-title">验房师</view>
+        <view class="ins-name">{{report.inspector.name||'—'}}</view>
+        <view class="muted">{{report.inspector.company||'独立验房师'}}</view>
+        <view class="muted" style="font-size:22rpx;color:#8E8E93;" wx:if="{{report.inspector.certNo}}">资质：{{report.inspector.certOrg}} · {{report.inspector.certNo}}</view>
+      </view>
+      <view class="tag tag-bad">{{report.badCount||0}}项问题</view>
+    </view>
+    <!-- 防伪区 -->
+    <view class="anti-box">
+      <view class="anti-title">🔒 报告验真</view>
+      <view class="anti-row">报告编号：<text style="font-weight:600;">{{report.reportNo}}</text></view>
+      <view class="anti-row" wx:if="{{report.antiCode}}">防伪码：<text style="font-weight:600;color:#007AFF;">{{report.antiCode}}</text> · 向验房师核对可验真伪</view>
+      <view class="anti-row" wx:else>防伪码：<text style="font-weight:600;color:#007AFF;">{{report.reportNo.split('-')[2]}}</text> · 向验房师核对可验真伪</view>
+      <view class="anti-how">验真方法：防伪码=报告号后4位数字+报告内容字符和转36进制。任何人可自行复算核对，防止报告被篡改伪造。</view>
+    </view>
+    <!-- 报告法律效力说明：让业主知道报告的价值边界 -->
+    <view class="card legal-card">
+      <view class="anti-title">⚖️ 报告效力说明</view>
+      <view class="legal-item">1. 本报告由持证验房师依据国家验收规范现场查验出具，可作为与开发商/物业交涉整改的书面依据。</view>
+      <view class="legal-item">2. 如涉及重大争议或诉讼，建议配合专业鉴定机构的检测报告使用，形成完整证据链。</view>
+      <view class="legal-item">3. 验房属于外观与功能查验，不替代房屋结构安全性鉴定（需专业资质机构）。</view>
+      <view class="legal-item">4. 报告防伪码可向出具报告的验房师核验真伪，谨防仿冒。</view>
+    </view>
+  </view>
+  <!-- 统计 -->
+  <view class="card">
+    <view class="sub-title">检测概况</view>
+    <view class="stat-row">
+      <view class="st"><view class="st-num">{{report.doneCount||report.badCount}}</view><view class="st-lbl">已检项</view></view>
+      <view class="st"><view class="st-num" style="color:#FF3B30">{{report.badCount||0}}</view><view class="st-lbl">问题</view></view>
+      <view class="st"><view class="st-num" style="color:#FF9500">{{report.midCount||0}}</view><view class="st-lbl">关注</view></view>
+      <view class="st"><view class="st-num" style="color:#34C759">{{report.okCount||0}}</view><view class="st-lbl">合格</view></view>
+      <view class="st"><view class="st-num" style="color:#007AFF">{{report.highCount||0}}</view><view class="st-lbl">高风险</view></view>
+    </view>
+  </view>
+  <!-- 问题分类分布：一眼看清集中在哪些系统 -->
+  <view class="card" wx:if="{{summary.length}}">
+    <view class="sub-title">问题分布（按系统）</view>
+    <view class="sum-row" wx:for="{{summary}}" wx:key="cat">
+      <view class="sum-name">{{item.cat}}</view>
+      <view class="sum-bar"><view class="sum-fill" style="width:{{(item.bad+item.mid)/(problems.length)*100}}%"></view></view>
+      <view class="sum-num" style="color:{{item.high>0?'#FF3B30':'#8E8E93'}};">{{item.bad+item.mid}}<text wx:if="{{item.high>0}}" style="font-size:20rpx;">({{item.high}}高)</text></view>
+    </view>
+    <view class="muted" style="margin-top:12rpx;" wx:if="{{summary.length>1}}">问题主要集中在{{summary[0].cat}}，建议优先处理。</view>
+  </view>
+  <!-- 综合评级 -->
+  <view class="card" wx:if="{{report.grade}}">
+    <view class="row-between" style="align-items:center;">
+      <view>
+        <view class="sub-title">综合评级</view>
+        <view class="grade-lbl" style="color:{{report.grade.color}};">{{report.grade.label}}（{{report.grade.grade}}级）</view>
+        <view class="muted" style="margin-top:8rpx;">{{report.grade.desc}}</view>
+      </view>
+      <view class="grade-badge" style="background:{{report.grade.color}};">{{report.grade.grade}}</view>
+    </view>
+  </view>
+  <!-- 收房决策建议：业主直接照做 -->
+  <view class="card" wx:if="{{advice}}" style="border-left:8rpx solid {{advice.color}};">
+    <view class="advice-title" style="color:{{advice.color}};">{{advice.title}}</view>
+    <view class="advice-item" wx:for="{{advice.items}}" wx:key="*this">· {{item}}</view>
+  </view>
+  <!-- AI 结论 -->
+  <view class="card" wx:if="{{report.aiConclusion}}">
+    <view class="sub-title">AI 验房结论</view>
+    <view class="ai-text">{{report.aiConclusion}}</view>
+  </view>
+  <!-- 问题清单（业主友好卡片式） -->
+  <view class="card">
+    <view class="sub-title">问题与关注清单</view>
+    <view class="prob-card {{item.type==='bad'?'pc-bad':'pc-mid'}}" wx:for="{{problems}}" wx:key="index">
+      <view class="pc-left"></view>
+      <view class="pc-body">
+        <view class="pc-head">
+          <view class="pc-name">{{index+1}}. {{item.name}}</view>
+          <view class="ptype {{item.type==='mid'?'p-mid':'p-bad'}}">{{item.type==='mid'?'关注':'问题'}}</view>
+          <view class="ptype p-fixed" wx:if="{{item.recheck==='fixed'}}">✓已整改</view>
+        </view>
+        <view class="muted" wx:if="{{item.location}}">📍 {{item.location}}</view>
+        <view class="muted" wx:if="{{item.metricTip}}">📏 {{item.metricTip}}</view>
+        <view class="muted" wx:if="{{item.note}}">📝 {{item.note}}</view>
+        <view class="pc-fix" wx:if="{{item.fix}}">🔧 {{item.fix}}</view>
+        <view class="pc-priority" wx:if="{{item.type==='bad' && item.risk==='high'}}">⚠️ 高风险，建议收房后1周内要求开发商整改</view>
+        <view class="pc-priority" wx:elif="{{item.type==='bad'}}">建议收房后2周内整改</view>
+        <view class="pc-priority" wx:elif="{{item.type==='mid'}}">建议装修前处理或记录观察</view>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{!problems.length}}" style="padding:30rpx 0;">本次未发现问题</view>
+  </view>
+  <!-- 照片墙 -->
+  <view class="card" wx:if="{{photos.length}}">
+    <view class="sub-title">现场照片（{{photos.length}}张）</view>
+    <view class="photos">
+      <image wx:for="{{photos}}" wx:key="*this" src="{{item}}" class="photo" mode="aspectFill" data-idx="{{index}}" bindtap="viewPhoto"/>
+    </view>
+  </view>
+  <!-- 签名 -->
+  <view class="card">
+    <view class="sub-title">验房师签名</view>
+    <image wx:if="{{report.signature}}" src="{{report.signature}}" class="sig" mode="aspectFit"/>
+    <view class="muted" wx:else>本报告未签名，仅供参考</view>
+  </view>
+  <view class="card" wx:if="{{report.ownerConfirmed}}">
+    <view class="sub-title">业主确认签名</view>
+    <image wx:if="{{report.ownerSignature}}" src="{{report.ownerSignature}}" class="sig" mode="aspectFit"/>
+    <view class="muted">业主已于 {{report.ownerConfirmTime||''}} 确认报告</view>
+  </view>
+  <view class="foot-tip">本报告由「AI 验房师」生成 · 报告编号 {{report.reportNo}}</view>
+  <view class="row-between" style="padding:0 16rpx 40rpx;">
+    <view class="btn-ghost flex1" bindtap="ownerFAQ">❓ 常见问题</view>
+  </view>
+  <view class="foot-tip" style="padding-bottom:20rpx;">签字确认请在现场由验房师协助完成，签字会写入报告并包含在导出的报告长图中。</view>
+</view>
+<view class="empty" wx:if="{{notFound}}">
+  <view style="font-size:32rpx;margin-bottom:16rpx;">📄 这份报告不在这台手机上</view>
+  <view style="font-size:26rpx;line-height:1.7;text-align:left;padding:0 40rpx;color:#8E8E93;">
+    本小程序为纯本地存储：报告、照片都只保存在验房师本人的手机里，不会上传到任何服务器，因此通过分享卡片打开时无法在业主手机上显示内容。
+  </view>
+  <view style="font-size:26rpx;line-height:1.7;text-align:left;padding:8rpx 40rpx 0;color:#8E8E93;">
+    请联系验房师获取以下任意一种形式的报告：
+  </view>
+  <view style="font-size:26rpx;line-height:1.9;text-align:left;padding:0 40rpx;color:#3C3C43;">
+    ① 「完整报告」复制出的文字版<br/>
+    ② 「导出图片报告」保存的图片<br/>
+    ③ 「整改通知单」文字版
+  </view>
+</view>
+<global-tabbar/>

@@ -1,0 +1,30 @@
+<view class="page">
+  <!-- 名片预览（页面实时版） -->
+  <view class="card biz">
+    <image wx:if="{{user.logoPath}}" src="{{user.logoPath}}" class="biz-logo" mode="aspectFill"/>
+    <canvas wx:else type="2d" id="logoCanvas" class="biz-logo" style="width:200rpx;height:200rpx;"></canvas>
+    <view class="biz-name">{{user.name||'未填写姓名'}}</view>
+    <view class="biz-sub">{{user.company||'独立验房师'}}</view>
+    <view class="biz-line" wx:if="{{user.certNo}}">🎓 {{user.certOrg}} · {{user.certNo}}</view>
+    <view class="biz-line">📞 {{user.phone||'电话待填写'}}</view>
+    <view class="biz-cardno">名片编号 {{cardNo}}</view>
+  </view>
+
+  <view class="card">
+    <view class="sub-title">服务范围</view>
+    <view class="muted">毛坯房验房 · 精装房验房 · 二手房查验 · 整改复检</view>
+  </view>
+
+  <view class="card tips">
+    <view class="sub-title">💡 使用提示</view>
+    <view class="muted" style="line-height:1.7;">先在「我的」页填写姓名、电话、公司、资质，生成专属logo后，点「保存名片」即可获得一张可发给业主的电子名片。业主看到名片和报告，更容易信任你、转介绍你。</view>
+  </view>
+
+  <view class="row-between" style="padding:0 16rpx;">
+    <view class="btn-ghost flex1" bindtap="genLogo">🎨 生成logo</view>
+    <view class="btn-primary flex1" style="margin-left:16rpx;" bindtap="saveCard">📤 保存名片</view>
+  </view>
+  <view class="btn-ghost" style="margin:20rpx 16rpx 0;" open-type="share">📣 转发名片给业主</view>
+</view>
+<canvas type="2d" id="cardCanvas" style="width:720px;height:1040px;position:fixed;left:-9999px;top:0;"></canvas>
+<global-tabbar/>

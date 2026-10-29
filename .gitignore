@@ -1,0 +1,24 @@
+# 依赖
+node_modules/
+miniprogram_npm/
+
+# 微信开发者工具本地配置（含个人 AppID/编译设置）
+project.private.config.json
+
+# 私有材料：软著申请、签字件、身份信息（已移出仓库，若回填也不会入库）
+软著申请/
+_private/
+*软著*
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# 日志与临时产物
+*.log
+*.tmp
+*.bak
+temp/

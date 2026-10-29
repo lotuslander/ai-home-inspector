@@ -1,0 +1,31 @@
+<view class="page">
+  <view class="card">
+    <view class="row-between">
+      <view>
+        <view class="sub-title">🧰 验房工具清单</view>
+        <view class="muted">{{taskType}}模式 · 已带 {{packed}}/{{total}} 件</view>
+      </view>
+      <view class="packed-badge {{allPacked?'done':''}}">{{allPacked?'✅ 已带齐':'还需'+(total-packed)+'件'}}</view>
+    </view>
+    <view class="progress-track"><view class="progress-fill" style="width:{{packed/total*100}}%"></view></view>
+  </view>
+  <view class="card" wx:for="{{groups}}" wx:key="name" wx:for-item="g">
+    <view class="group-title">{{g.name}}</view>
+    <view class="tool-row {{item.checked?'checked':''}}" wx:for="{{g.items}}" wx:key="id" data-id="{{item.id}}" bindtap="toggle">
+      <view class="tool-check">{{item.checked?'☑':'☐'}}</view>
+      <view class="tool-body">
+        <view class="tool-name">
+          {{item.name}}
+          <text class="tool-must" wx:if="{{item.must}}">必带</text>
+        </view>
+        <view class="tool-need">{{item.need}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="btn-grid">
+    <view class="btn-ghost" bindtap="clearAll">清空勾选</view>
+    <view class="btn-ghost" bindtap="packAll">一键全选</view>
+    <view class="btn-primary" bindtap="genList">📋 生成打包提醒</view>
+  </view>
+</view>
+<global-tabbar/>

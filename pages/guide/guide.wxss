@@ -1,0 +1,9 @@
+.title{font-size:32rpx;font-weight:700;margin-bottom:12rpx;}
+.t-strong{font-size:30rpx;font-weight:700;margin-bottom:12rpx;color:#007AFF;}
+.step{padding:8rpx 0;font-size:28rpx;}
+.kv{background:#F2F2F7;padding:16rpx;border-radius:12rpx;margin-top:8rpx;font-size:24rpx;}
+.q{font-size:26rpx;font-weight:600;margin-top:12rpx;}
+.a{font-size:26rpx;color:#3C3C43;margin-top:4rpx;}
+.tip-card{background:#E5F0FF;}
+
+.apply-btn{margin-top:12rpx;padding:16rpx;background:#007AFF;color:#fff;border-radius:12rpx;text-align:center;font-size:26rpx;font-weight:600;}

@@ -1,0 +1,22 @@
+.sub-title { font-weight: 600; margin-bottom: 8rpx; }
+.loc-chips { display: flex; flex-wrap: wrap; gap: 10rpx; margin-bottom: 12rpx; }
+.loc-chip { background: #F2F2F7; color: #3C3C43; padding: 8rpx 20rpx; border-radius: 24rpx; font-size: 24rpx; }
+.metric-tip { font-size: 24rpx; color: #FF9500; margin-top: 12rpx; background: #FFF6E5; padding: 12rpx; border-radius: 8rpx; }
+.photos { display: flex; flex-wrap: wrap; gap: 12rpx; }
+.photo { width: 150rpx; height: 150rpx; border-radius: 12rpx; }
+.photo.add { background: #F2F2F7; display: flex; align-items: center; justify-content: center; font-size: 40rpx; color: #8E8E93; }
+.ai-btn { background: #E5F0FF; color: #007AFF; text-align: center; padding: 16rpx; border-radius: 12rpx; margin-top: 16rpx; }
+.owner-text { font-size: 26rpx; line-height: 1.6; color: #3C3C43; background: #F2F2F7; padding: 16rpx; border-radius: 12rpx; margin-top: 16rpx; }
+input { background: #F2F2F7; padding: 16rpx; border-radius: 12rpx; margin-top: 8rpx; }
+.note-row { display: flex; align-items: center; gap: 12rpx; margin-top: 8rpx; }
+.note-input { flex: 1; background: #F2F2F7; padding: 16rpx; border-radius: 12rpx; }
+.mic-btn { width: 72rpx; height: 72rpx; border-radius: 36rpx; background: #007AFF; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 32rpx; flex-shrink: 0; }
+.measure-btn { background: #007AFF; color: #fff; text-align: center; padding: 16rpx; border-radius: 12rpx; font-weight: 600; margin-top: 8rpx; }
+.pro-method{margin-top:12rpx;background:#F0F7FF;border-radius:12rpx;padding:16rpx;}
+.pm-row{display:flex;align-items:flex-start;margin-bottom:8rpx;}
+.pm-row:last-child{margin-bottom:0;}
+.pm-lbl{flex-shrink:0;width:96rpx;font-size:24rpx;color:#007AFF;font-weight:600;}
+.pm-val{flex:1;font-size:25rpx;color:#3C3C43;line-height:1.5;}
+
+/* 仪器数据行（原来缺样式，按钮与输入框贴在一起） */
+.metric-row { margin: 8rpx 0; }

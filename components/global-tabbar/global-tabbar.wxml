@@ -1,0 +1,40 @@
+<!--components/global-tabbar/global-tabbar.wxml 全局底部栏：工作台 | AI气泡 | 我的（单根节点）-->
+<view class="tab-wrap">
+  <view class="tabbar">
+    <view class="tab {{selected===0?'active':''}}" data-path="/pages/index/index" bindtap="switchTab">
+      <image class="tab-icon" src="{{selected===0?ICONS.deskBlue:ICONS.deskGray}}"/>
+      <view class="tab-text">工作台</view>
+    </view>
+    <view class="tab-bubble" bindtap="togglePanel">
+      <view class="bubble">
+        <image class="bubble-house" src="{{ICONS.houseWhite}}"/>
+        <view class="bubble-ai">AI</view>
+      </view>
+    </view>
+    <view class="tab {{selected===1?'active':''}}" data-path="/pages/mine/mine" bindtap="switchTab">
+      <image class="tab-icon" src="{{selected===1?ICONS.personBlue:ICONS.personGray}}"/>
+      <view class="tab-text">我的</view>
+    </view>
+  </view>
+  <view class="fab-mask" wx:if="{{showPanel}}" bindtap="togglePanel"></view>
+  <view class="fab-panel" wx:if="{{showPanel}}">
+    <view class="fab-title">AI 验房助手</view>
+    <scroll-view scroll-y class="fab-msgs">
+      <view wx:for="{{messages}}" wx:key="index" class="fab-msg {{item.role}}">{{item.text}}
+        <view wx:if="{{item.normKey}}" class="fab-norm-link" bindtap="openNorms" data-k="{{item.normKey}}">📖 查规范条文库</view>
+      </view>
+    </scroll-view>
+    <view class="fab-chips">
+      <view class="fab-chip" data-q="今天验房重点查什么" bindtap="quickAsk">今日重点</view>
+      <view class="fab-chip" data-q="空鼓多少算超标" bindtap="quickAsk">查规范</view>
+      <view class="fab-chip" data-q="墙面裂缝怎么跟业主解释" bindtap="quickAsk">跟业主说</view>
+      <view class="fab-chip" data-q="验房常见失误有哪些" bindtap="quickAsk">新手避坑</view>
+    </view>
+    <view class="fab-input-row">
+      <view class="fab-voice" bindtap="takePhoto">📷</view>
+      <view class="fab-voice fab-voice-hold {{voiceOn?'hold-on':''}}" bindtouchstart="voiceStart" bindtouchend="voiceEnd">🎤</view>
+      <input class="fab-input" placeholder="问AI验房问题..." value="{{input}}" bindinput="onInput" confirm-type="send" bindconfirm="send"/>
+      <view class="fab-send" bindtap="send">发送</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,7 @@
+.tag{display:inline-block;font-size:21rpx;padding:4rpx 14rpx;border-radius:8rpx;}
+.tag-bad{background:#FFEBEB;color:#FF3B30;}
+.tag-ok{background:#E8F5EC;color:#34C759;}
+.r-name{font-size:30rpx;font-weight:600;}
+.photo-chip{display:inline-block;margin-top:12rpx;font-size:22rpx;color:#007AFF;background:#E5F0FF;padding:6rpx 18rpx;border-radius:20rpx;}
+.share-chip{display:inline-block;margin-top:12rpx;margin-left:12rpx;font-size:22rpx;color:#fff;background:#007AFF;padding:6rpx 18rpx;border-radius:20rpx;line-height:1.4;}
+.share-chip::after{border:none;}

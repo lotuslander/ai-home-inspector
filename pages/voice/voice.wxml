@@ -1,0 +1,67 @@
+<view class="page">
+  <view class="card task-bar" wx:if="{{task}}">
+    <view class="t-strong">{{task.community}} {{task.room}}</view>
+    <view class="muted">连续口述 · 手机放兜里，你说系统记，自动填入清单</view>
+  </view>
+
+  <!-- 未配置ASR提示 -->
+  <view class="card warn-card" wx:if="{{!cfgReady}}">
+    <view class="warn-title">⚠️ 语音引擎未配置</view>
+    <view class="muted" style="margin:12rpx 0 20rpx;">需要先配置ASR接口（复用你申请的大模型语音能力），才能口述转文字。</view>
+    <view class="btn-primary" bindtap="goAsrConfig">去配置语音引擎</view>
+  </view>
+
+  <!-- 录音主控 -->
+  <view class="card rec-card" wx:if="{{cfgReady}}">
+    <view class="rec-status {{recording?'on':''}}">
+      <view class="rec-dot {{recording?'pulse':''}}"></view>
+      <text>{{recording?'正在连续记录 · 直接说话':'点击开始，全程口述'}}</text>
+    </view>
+    <view class="rec-btn-row">
+      <view wx:if="{{!recording}}" class="btn-primary flex1" bindtap="startRec">🎙️ 开始口述记录</view>
+      <view wx:if="{{recording}}" class="btn-warn flex1" bindtap="stopRec">⏹ 结束记录</view>
+    </view>
+    <view class="muted center" style="margin-top:16rpx;">已录 {{elapsed}} 秒 · 已并入 {{merged.length}} 条 · 待归类 {{pending.length}} 条</view>
+    <view class="trans-status" wx:if="{{transStatus}}">{{transStatus}}</view>
+  </view>
+
+  <!-- 已自动并入清单 -->
+  <view class="card" wx:if="{{merged.length}}">
+    <view class="sub-title">✅ 已自动填入清单（{{merged.length}}）</view>
+    <view class="draft-item" wx:for="{{merged}}" wx:key="id">
+      <view class="draft-head">
+        <view class="tag tag-info">{{item.room || '待定'}}</view>
+        <view class="tag {{item.risk==='high'?'tag-bad':item.risk==='low'?'tag-ok':'tag-warn'}}">{{riskText[item.risk]}}</view>
+        <view class="muted" style="flex:1;text-align:right;">{{item.ts}}</view>
+      </view>
+      <view class="draft-body">{{item.itemName}}{{item.location ? ' · ' + item.location : ''}}</view>
+      <view class="muted" wx:if="{{item.problem}}">{{item.problem}}</view>
+      <view class="op-row"><view class="op-btn danger" data-id="{{item.id}}" bindtap="undoMerge">↩ 撤销并入</view></view>
+    </view>
+  </view>
+
+  <!-- 待归类草稿 -->
+  <view class="card" wx:if="{{pending.length}}">
+    <view class="sub-title">⚠️ 待归类（{{pending.length}}）</view>
+    <view class="draft-item" wx:for="{{pending}}" wx:key="id">
+      <view class="draft-head">
+        <view class="tag tag-warn">未匹配检查项</view>
+        <view class="muted" style="flex:1;text-align:right;">{{item.ts}}</view>
+      </view>
+      <view class="draft-body">{{item.problem}}</view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{cfgReady && (merged.length || pending.length)}}">
+    <view class="btn-primary" bindtap="goReview">🧰 矫正与归类（{{pending.length}}条待处理）</view>
+    <view class="muted" style="margin-top:12rpx;">已自动并入的可在清单中直接改；待归类的在这里选检查项。</view>
+  </view>
+
+  <view class="card tip-card" wx:if="{{cfgReady}}">
+    <view class="sub-title">🎙️ 口述技巧（决定识别准确率）</view>
+    <view class="tip-line">· 一句话结构：<text class="tip-ex">房间 + 位置 + 问题</text>，如"主卧东墙距地1.2米空鼓"</view>
+    <view class="tip-line">· 一次说一个问题，句与句之间自然停顿</view>
+    <view class="tip-line">· 没识别对没关系，说一句"上一条不对"，验完在清单里改</view>
+  </view>
+  <global-tabbar/>
+</view>

@@ -1,0 +1,66 @@
+<view class="page">
+  <view class="card">
+    <view class="title">🤖 大模型 API 申请教程</view>
+    <view class="muted" style="margin-top:8rpx;">AI 验房师的所有 AI 功能（问答、看图、写结论）都需要一个"大模型接口"。以下 5 选 1 即可，全程 5-10 分钟，新用户都有免费额度。</view>
+  </view>
+
+  <view class="card" bindtap="goDetail" data-model="qwen">
+    <view class="t-strong">1️⃣ 阿里通义千问（推荐，带看图能力）</view>
+    <view class="step">① 用支付宝/淘宝账号登录</view>
+    <view class="step">② 左侧菜单点「API-KEY」→「创建」→ 复制那串 Key</view>
+    <view class="step">③ 在 我的→大模型接口 里粘贴 Key</view>
+    <view class="kv">接口地址：https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions</view>
+    <view class="kv">模型名：qwen-vl-plus（看图）或 qwen-plus（纯问答）</view>
+    <view class="apply-btn">👉 点这里看详细申请步骤</view>
+  </view>
+
+  <view class="card" bindtap="goDetail" data-model="doubao">
+    <view class="t-strong">2️⃣ 字节豆包（语音/问答都不错）</view>
+    <view class="step">① 开通服务 → 创建「API Key」</view>
+    <view class="step">② 模型名填你的「接入点ID」</view>
+    <view class="kv">接口地址：https://ark.cn-beijing.volces.com/api/v3/chat/completions</view>
+    <view class="apply-btn">👉 点这里看详细申请步骤</view>
+  </view>
+
+  <view class="card" bindtap="goDetail" data-model="deepseek">
+    <view class="t-strong">3️⃣ DeepSeek（纯文字，便宜好用）</view>
+    <view class="step">① 左侧「API Keys」→ 创建 → 复制</view>
+    <view class="step">② 模型名填 deepseek-chat</view>
+    <view class="kv">接口地址：https://api.deepseek.com/chat/completions</view>
+    <view class="kv">注意：DeepSeek 不能看图，AI看图请用通义千问VL</view>
+    <view class="apply-btn">👉 点这里看详细申请步骤</view>
+  </view>
+
+  <view class="card" bindtap="goDetail" data-model="glm">
+    <view class="t-strong">4️⃣ 智谱 GLM（免费额度多）</view>
+    <view class="step">① 手机号注册 → 左侧「API密钥」→ 新建</view>
+    <view class="step">② 模型名填 glm-4-flash（免费）或 glm-4v-flash（看图）</view>
+    <view class="kv">接口地址：https://open.bigmodel.cn/api/paas/v4/chat/completions</view>
+    <view class="apply-btn">👉 点这里看详细申请步骤</view>
+  </view>
+
+  <view class="card" bindtap="goDetail" data-model="baidu">
+    <view class="t-strong">5️⃣ 百度文心一言（国内大厂，稳定）</view>
+    <view class="step">① 百度账号登录 → 开通「文心一言大模型」</view>
+    <view class="step">② 创建 API Key + Secret Key</view>
+    <view class="step">③ 模型名填 ernie-4.0 或 ernie-3.5</view>
+    <view class="kv">接口地址：https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions</view>
+    <view class="apply-btn">👉 点这里看详细申请步骤</view>
+  </view>
+
+  <view class="card">
+    <view class="t-strong">❓ 常见问题</view>
+    <view class="q">问：要不要花钱？</view>
+    <view class="a">答：日常验房问答用量很小，免费额度基本够用；上商用后建议换付费套餐。</view>
+    <view class="q">问：填了为什么没反应？</view>
+    <view class="a">答：① Key 复制全了没（别带空格）② 地址别改 ③ 模型名别写错 ④ 检查网络。</view>
+    <view class="q">问：想先试试不申请可以吗？</view>
+    <view class="a">答：可以！小程序内置了本地规范知识库，没配 API 也能查条文、看案例。</view>
+  </view>
+
+  <view class="card tip-card">
+    <view class="t-strong">💡 配置入口</view>
+    <view class="muted">我的 → 大模型接口 → 粘贴 Key、地址、模型名 → 保存</view>
+  </view>
+</view>
+<global-tabbar/>

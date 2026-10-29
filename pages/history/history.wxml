@@ -1,0 +1,13 @@
+<view class="page">
+  <view class="card" wx:for="{{reports}}" wx:key="reportNo">
+    <view class="row-between" data-idx="{{index}}" bindtap="viewReport">
+      <view class="r-name">{{item.community}} {{item.room}}</view>
+      <view class="tag {{item.badCount>0?'tag-bad':'tag-ok'}}">{{item.badCount}}问题</view>
+    </view>
+    <view class="muted" style="margin-top:8rpx;" data-idx="{{index}}" bindtap="viewReport">{{item.reportNo}} · {{item.date}} · 已检{{item.doneCount||item.badCount}}项 ›</view>
+    <view class="photo-chip" data-idx="{{index}}" catchtap="viewPhotos">📷 查看问题照片</view>
+    <button class="share-chip" data-no="{{item.reportNo}}" catchtap="copyFullReport">📤 复制报告文本发给业主</button>
+  </view>
+  <view class="empty" wx:if="{{!reports.length}}">还没有历史报告，点击首页「开始验房」创建第一份</view>
+</view>
+<global-tabbar/>

@@ -1,0 +1,24 @@
+<view class="page">
+  <view class="card">
+    <view class="t-strong">{{name}}</view>
+  </view>
+
+  <view class="card">
+    <view class="label">接口地址（已填好，不用改）</view>
+    <view class="kv">{{endpoint}}</view>
+  </view>
+
+  <view class="card">
+    <view class="label">模型名（已填好，不用改）</view>
+    <view class="kv">{{model}}</view>
+  </view>
+
+  <view class="card">
+    <view class="label">API Key（填你自己申请的）</view>
+    <input class="input" placeholder="粘贴你的API Key" value="{{apiKey}}" bindinput="onKeyInput" password/>
+  </view>
+
+  <view class="btn-primary" bindtap="save">保存</view>
+  <view class="btn-danger" bindtap="clear">清除Key</view>
+</view>
+<global-tabbar/>

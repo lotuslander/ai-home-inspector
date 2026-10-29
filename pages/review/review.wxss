@@ -1,0 +1,16 @@
+.task-bar { background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%); color: #fff; }
+.task-bar .t-strong { color: #fff; font-size: 34rpx; }
+.task-bar .muted { color: rgba(255,255,255,0.85); }
+.draft-card { padding: 24rpx; }
+.draft-head { display: flex; align-items: center; gap: 12rpx; margin-bottom: 12rpx; }
+.draft-state { font-size: 22rpx; font-weight: 600; padding: 4rpx 14rpx; border-radius: 8rpx; }
+.draft-state.ok { background: #E8F5EC; color: #34C759; }
+.draft-state.no { background: #FFF4E5; color: #FF9500; }
+.draft-main { background: #F9F9FB; border-radius: 14rpx; padding: 16rpx 20rpx; margin-bottom: 14rpx; }
+.draft-title { font-size: 29rpx; font-weight: 600; margin-bottom: 6rpx; }
+.photo-row { display: flex; flex-wrap: wrap; gap: 12rpx; margin-bottom: 14rpx; }
+.photo-thumb { width: 132rpx; height: 132rpx; border-radius: 10rpx; }
+.draft-ops { display: flex; gap: 14rpx; flex-wrap: wrap; }
+.op-btn { font-size: 25rpx; padding: 12rpx 26rpx; border-radius: 30rpx; background: #F2F2F7; color: #3C3C43; }
+.op-btn.primary { background: #007AFF; color: #fff; font-weight: 600; }
+.op-btn.danger { background: #FFEBEB; color: #FF3B30; }

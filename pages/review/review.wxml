@@ -1,0 +1,43 @@
+<view class="page">
+  <view class="card task-bar" wx:if="{{task}}">
+    <view class="t-strong">{{task.community}} {{task.room}}</view>
+    <view class="muted">逐条确认后并入清单 · 未确认的不进报告</view>
+  </view>
+
+  <view class="empty" wx:if="{{!drafts.length}}">暂无语音草稿<br/>去现场记录页开始口述验房</view>
+
+  <view class="card draft-card" wx:for="{{drafts}}" wx:key="id" wx:for-item="d">
+    <view class="draft-head">
+      <view class="tag tag-info">{{d.room || '待定房间'}}</view>
+      <view class="tag {{d.risk==='high'?'tag-bad':d.risk==='low'?'tag-ok':'tag-warn'}}">{{riskText[d.risk]}}</view>
+      <view class="muted" style="flex:1;text-align:right;">{{d.ts}}</view>
+      <view class="draft-state {{d.confirmed?'ok':'no'}}">{{d.confirmed?'已并入':'待确认'}}</view>
+    </view>
+    <view class="draft-main" wx:if="{{d.matched}}">
+      <view class="draft-title">{{d.catName}} · {{d.itemName}}</view>
+      <view class="muted">{{d.location}}</view>
+      <view class="muted" wx:if="{{d.problem}}">{{d.problem}}</view>
+    </view>
+    <view class="draft-main" wx:if="{{!d.matched}}">
+      <view class="draft-title">{{d.problem}}</view>
+      <view class="tag tag-warn" style="margin-top:8rpx;">AI未匹配到检查项，需手动归类</view>
+    </view>
+    <view class="photo-row" wx:if="{{d.photos.length}}">
+      <image wx:for="{{d.photos}}" wx:key="url" src="{{item.url || item}}" class="photo-thumb" mode="aspectFill" data-src="{{item.url || item}}" bindtap="previewPhoto"/>
+    </view>
+    <view class="draft-ops">
+      <view class="op-btn" data-id="{{d.id}}" bindtap="addPhoto">📷 补照片</view>
+      <view class="op-btn" data-id="{{d.id}}" bindtap="fixDraft">✏️ 修正</view>
+      <view class="op-btn danger" data-id="{{d.id}}" bindtap="delDraft">🗑 删除</view>
+      <view class="op-btn primary" data-id="{{d.id}}" bindtap="confirmDraft">✓ 确认并入</view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{drafts.length && pendingCount>0}}">
+    <view class="btn-primary" bindtap="confirmAll">✓ 全部确认并入清单（{{pendingCount}}条）</view>
+  </view>
+  <view class="card" wx:if="{{confirmedCount>0}}">
+    <view class="btn-ghost" bindtap="goChecklist">📋 已并入 {{confirmedCount}} 条，去清单查看</view>
+  </view>
+  <global-tabbar/>
+</view>

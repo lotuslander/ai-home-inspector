@@ -1,0 +1,46 @@
+.c-name { font-size: 30rpx; font-weight: 600; }
+.call-btn { background: #34C759; color: #fff; font-size: 24rpx; padding: 8rpx 28rpx; border-radius: 24rpx; }
+.btn-primary { margin: 16rpx; }
+.f-tag { font-size: 20rpx; padding: 4rpx 18rpx; border-radius: 20rpx; }
+.f-todo { background: #FFF4E5; color: #FF9500; }
+.f-done { background: #E5F1FF; color: #007AFF; }
+.f-closed { background: #E9F9EF; color: #34C759; }
+.mask { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; display: flex; align-items: flex-end; }
+.sheet { background: #fff; width: 100%; border-radius: 28rpx 28rpx 0 0; padding: 40rpx 32rpx 60rpx; box-sizing: border-box; }
+.close-x { font-size: 36rpx; color: #8E8E93; padding: 0 8rpx; }
+.s-card { flex: 1; background: #F2F2F7; border-radius: 16rpx; padding: 20rpx; margin-right: 12rpx; }
+.s-card:last-child { margin-right: 0; }
+.s-lbl { font-size: 22rpx; color: #8E8E93; margin-bottom: 8rpx; }
+.s-val { font-size: 28rpx; font-weight: 600; }
+.s-hint { font-size: 20rpx; color: #C7C7CC; margin-top: 6rpx; }
+.note-box { background: #FFF9E6; border-radius: 16rpx; padding: 20rpx; margin-top: 24rpx; }
+.tl-box { margin-top: 24rpx; background: #F8F8FA; border-radius: 16rpx; padding: 20rpx; }
+.tl-item { display: flex; padding: 10rpx 0; }
+.tl-dot { width: 16rpx; height: 16rpx; border-radius: 50%; margin: 8rpx 16rpx 0 0; flex-shrink: 0; }
+.tl-dot-r { background: #007AFF; }
+.tl-dot-g { background: #34C759; }
+.tl-body { flex: 1; }
+.tl-text { font-size: 25rpx; color: #3C3C43; }
+.tl-date { font-size: 21rpx; color: #C7C7CC; margin-top: 2rpx; }
+.comm-row { display: flex; align-items: center; padding: 12rpx 0; border-bottom: 1rpx solid #F2F2F7; }
+.comm-row:last-child { border-bottom: none; }
+.comm-name { font-size: 28rpx; font-weight: 600; flex: 1; }
+.comm-meta { font-size: 23rpx; color: #8E8E93; margin-right: 16rpx; }
+.comm-pend { font-size: 20rpx; color: #FF9500; background: #FFF4E5; padding: 4rpx 14rpx; border-radius: 16rpx; flex-shrink: 0; }
+.comm-pend.comm-ok { color: #34C759; background: #E8F5EC; }
+.biz-row { display: flex; }
+.biz-item { flex: 1; text-align: center; padding: 12rpx 0; }
+.biz-num { font-size: 36rpx; font-weight: 700; color: #007AFF; }
+.biz-lbl { font-size: 22rpx; color: #8E8E93; margin-top: 4rpx; }
+.follow-card { background: #FFF8E6; border: 1rpx solid #FFE9B8; }
+.follow-row { display: flex; flex-wrap: wrap; gap: 8rpx; align-items: center; padding: 10rpx 0; border-bottom: 1rpx solid #FFF3D6; }
+.follow-row:last-child { border-bottom: none; }
+.follow-name { font-size: 25rpx; font-weight: 600; width: 100%; }
+.follow-room { font-size: 21rpx; color: #8E8E93; font-weight: 400; }
+.follow-tag { font-size: 20rpx; color: #B8860B; background: #FFF3D6; padding: 4rpx 12rpx; border-radius: 14rpx; margin-top: 4rpx; display: inline-block; }
+.ref-row { margin-top: 16rpx; padding-top: 16rpx; border-top: 1rpx solid #F2F2F7; }
+.ref-item { font-size: 24rpx; color: #3C3C43; padding: 6rpx 0; }
+
+/* 客户卡片（原来 c-card 无样式，与卡片默认外观无差异之外还缺内边距控制） */
+.c-card { padding-bottom: 20rpx; }
+.report { font-size: 22rpx; color: #007AFF; background: #E5F0FF; padding: 4rpx 12rpx; border-radius: 10rpx; }

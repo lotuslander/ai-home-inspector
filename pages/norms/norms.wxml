@@ -1,0 +1,55 @@
+<view class="page">
+  <input class="search" placeholder="直接问：卫生间防水做多高？" value="{{keyword}}" bindinput="onSearch"/>
+  <!-- 高频判定线速查：现场最高频的量化标准，一眼看到 -->
+  <view class="quick-card" wx:if="{{showQuick}}">
+    <view class="quick-head" bindtap="toggleQuick">
+      <view class="quick-title">⚡ 现场判定线速查</view>
+      <view class="quick-fold">{{showQuick?'收起':'展开'}}</view>
+    </view>
+    <view class="quick-grid" wx:if="{{showQuick}}">
+      <view class="quick-item" wx:for="{{quickStandards}}" wx:key="item" data-k="{{item.item}} {{item.cat}} {{item.std}}" bindtap="quickSearch">
+        <view class="quick-cat">{{item.cat}}·{{item.item}}</view>
+        <view class="quick-std">{{item.std}}</view>
+        <view class="quick-code">{{item.code}}</view>
+      </view>
+    </view>
+    <view class="quick-hint">点任意一条自动检索对应规范条文</view>
+  </view>
+  <!-- 地方规范参考：按所在城市查看当地高于国标的要点 -->
+  <view class="quick-card local-card">
+    <view class="quick-head" bindtap="toggleLocal">
+      <view class="quick-title">🏙️ 地方规范参考（10省市）</view>
+      <view class="quick-fold">{{showLocal?'收起':'展开'}}</view>
+    </view>
+    <view class="local-grid" wx:if="{{showLocal}}">
+      <view class="local-item" wx:for="{{localStandards}}" wx:key="region">
+        <view class="local-region">{{item.region}} <text class="local-code">{{item.code}}</text></view>
+        <view class="local-pt" wx:for="{{item.points}}" wx:for-item="pt" wx:key="*this">· {{pt}}</view>
+      </view>
+    </view>
+    <view class="quick-hint" wx:if="{{showLocal}}">各地文件以当地住建部门最新发布为准，仅供参考</view>
+  </view>
+  <scroll-view scroll-x class="cat-bar" wx:if="{{catGuide.length}}">
+    <view class="cat-chip {{activeCat===''?'active':''}}" data-cat="" bindtap="pickCat">🏠 全部</view>
+    <view class="cat-chip {{activeCat===item.cat?'active':''}}" wx:for="{{catGuide}}" wx:key="cat" data-cat="{{item.cat}}" bindtap="pickCat">{{item.cat}}</view>
+  </scroll-view>
+  <scroll-view scroll-x class="code-bar" wx:if="{{codes.length}}">
+    <view class="code-chip {{activeCode===''?'active':''}}" data-code="" bindtap="filterByCode">全部</view>
+    <view class="code-chip {{activeCode===item?'active':''}}" wx:for="{{codes}}" wx:key="*this" data-code="{{item}}" bindtap="filterByCode">{{item}}</view>
+  </scroll-view>
+  <!-- AI 答案卡片 -->
+  <view class="ai-answer-card" wx:if="{{aiAnswer}}">
+    <view class="ai-answer-title">🤖 AI 回答</view>
+    <view class="ai-answer-text">{{aiAnswer}}</view>
+  </view>
+  <view class="ai-loading" wx:if="{{aiLoading}}">AI 正在查规范...</view>
+  <view class="hit-bar" wx:if="{{totalHits>0}}">命中 {{totalHits}} 条相关条文</view>
+  <view class="card" wx:for="{{norms}}" wx:key="code">
+    <view class="title">{{item.code}}</view>
+    <view class="muted">{{item.name}}</view>
+    <view class="norm-note" wx:if="{{item.note}}">⚠️ {{item.note}}</view>
+    <rich-text wx:for="{{item.points}}" wx:for-item="p" wx:key="*this" class="pt" nodes="{{p.html}}"></rich-text>
+  </view>
+  <view class="empty" wx:if="{{keyword && !norms.length}}">没找到相关条文，换个词试试</view>
+</view>
+<global-tabbar/>

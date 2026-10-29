@@ -1,0 +1,48 @@
+.head { background: linear-gradient(135deg, #007AFF, #5856D6); color: #fff; text-align: center; padding: 50rpx 28rpx 40rpx; }
+.h-title { font-size: 40rpx; font-weight: 700; letter-spacing: 4rpx; }
+.h-no { font-size: 24rpx; opacity: 0.85; margin-top: 10rpx; }
+.h-room { font-size: 30rpx; font-weight: 600; margin-top: 10rpx; }
+.sub-title { font-weight: 700; margin-bottom: 12rpx; }
+.ins-name { font-size: 32rpx; font-weight: 600; }
+.stat-row { display: flex; justify-content: space-around; }
+.st { text-align: center; }
+.st-num { font-size: 36rpx; font-weight: 700; }
+.st-lbl { font-size: 20rpx; color: #8E8E93; margin-top: 4rpx; }
+.prob { padding: 16rpx 0; border-bottom: 1rpx solid #E5E5EA; }
+.prob-name { font-weight: 600; font-size: 28rpx; }
+.ptype { font-size: 20rpx; padding: 2rpx 10rpx; border-radius: 6rpx; font-weight: 500; }
+.p-bad { background: #FFEBEB; color: #FF3B30; }
+.p-mid { background: #FFF4E5; color: #FF9500; }
+.p-fixed { background: #E8F5EC; color: #34C759; margin-left: 12rpx; }
+.photos { display: flex; flex-wrap: wrap; gap: 12rpx; }
+.photo { width: 160rpx; height: 160rpx; border-radius: 12rpx; }
+.sig { width: 300rpx; height: 150rpx; }
+.foot-tip { text-align: center; color: #8E8E93; font-size: 22rpx; padding: 30rpx 0 10rpx; }
+.ai-text { font-size: 27rpx; line-height: 1.6; color: #3C3C43; background: #F2F2F7; padding: 16rpx; border-radius: 12rpx; }
+.prob-card { display: flex; margin-bottom: 16rpx; background: #F9F9FB; border-radius: 12rpx; overflow: hidden; }
+.pc-left { width: 8rpx; flex-shrink: 0; }
+.pc-bad .pc-left { background: #FF3B30; }
+.pc-mid .pc-left { background: #FF9500; }
+.pc-body { flex: 1; padding: 16rpx 20rpx; }
+.pc-head { display: flex; align-items: center; flex-wrap: wrap; gap: 8rpx; }
+.pc-name { font-weight: 600; font-size: 28rpx; flex: 1; }
+.pc-fix { margin-top: 8rpx; font-size: 25rpx; color: #3C3C43; }
+.muted { font-size: 24rpx; color: #8E8E93; margin-top: 4rpx; }
+.pc-priority{font-size:22rpx;color:#FF9500;margin-top:8rpx;padding:8rpx 12rpx;background:#FFF8E6;border-radius:8rpx;}
+.anti-box{margin-top:20rpx;background:#F0F7FF;border-radius:12rpx;padding:16rpx 20rpx;}
+.anti-title{font-size:24rpx;font-weight:600;color:#007AFF;margin-bottom:8rpx;}
+.anti-row{font-size:24rpx;color:#3C3C43;margin-top:4rpx;}
+.grade-lbl{font-size:34rpx;font-weight:700;}
+.grade-badge{width:88rpx;height:88rpx;border-radius:50%;color:#fff;font-size:44rpx;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sum-row{display:flex;align-items:center;padding:8rpx 0;}
+.sum-name{width:150rpx;font-size:24rpx;color:#3C3C43;flex-shrink:0;}
+.sum-bar{flex:1;height:16rpx;background:#F2F2F7;border-radius:8rpx;overflow:hidden;margin:0 12rpx;}
+.sum-fill{height:100%;background:linear-gradient(90deg,#FF9500,#FF3B30);border-radius:8rpx;}
+.sum-num{font-size:26rpx;font-weight:600;width:90rpx;text-align:right;flex-shrink:0;}
+.advice-title{font-size:30rpx;font-weight:700;margin-bottom:10rpx;}
+.advice-item{font-size:25rpx;color:#3C3C43;line-height:1.7;margin-top:6rpx;}
+.legal-card { background: #F9F9FB; }
+.legal-item { font-size: 23rpx; color: #636366; line-height: 1.7; margin-top: 8rpx; }
+.anti-how { font-size: 20rpx; color: #8E8E93; margin-top: 10rpx; line-height: 1.6; }
+.one-line { font-size: 26rpx; color: #3C3C43; line-height: 1.7; background: #F0F7FF; padding: 16rpx; border-radius: 12rpx; }
+.copy-link { font-size: 24rpx; color: #007AFF; font-weight: 600; }

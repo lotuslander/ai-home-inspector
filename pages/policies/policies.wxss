@@ -1,0 +1,8 @@
+.page { padding: 20rpx; }
+.cat-bar { display: flex; gap: 12rpx; flex-wrap: wrap; margin-bottom: 20rpx; }
+.cat-chip { font-size: 24rpx; padding: 12rpx 24rpx; background: #fff; border-radius: 30rpx; border: 1rpx solid #E5E5EA; color: #3C3C43; }
+.cat-chip.active { background: #007AFF; color: #fff; border-color: #007AFF; }
+.doc { background: #fff; border-radius: 16rpx; padding: 30rpx; }
+.doc-title { font-size: 32rpx; font-weight: 700; margin-bottom: 20rpx; }
+.doc-sec { font-size: 27rpx; font-weight: 600; color: #007AFF; margin: 20rpx 0 10rpx; }
+.doc-p { font-size: 25rpx; color: #3C3C43; line-height: 1.8; margin-bottom: 8rpx; }

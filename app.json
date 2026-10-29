@@ -1,0 +1,53 @@
+{
+    "pages":  [
+                  "pages/index/index",
+                  "pages/mine/mine",
+                  "pages/checklist/checklist",
+                  "pages/detail/detail",
+                  "pages/report/report",
+                  "pages/card/card",
+                  "pages/guide/guide",
+                  "pages/norms/norms",
+                  "pages/clients/clients",
+                  "pages/history/history",
+                  "pages/cases/cases",
+                  "pages/recheck/recheck",
+                  "pages/sign/sign",
+                  "pages/share/share",
+                  "pages/guide/detail/detail",
+                  "pages/llm-config/llm-config",
+                  "pages/llm-config/detail/detail",
+                  "pages/tools/tools",
+                  "pages/policies/policies",
+                  "pages/voice/voice",
+                  "pages/review/review",
+                  "pages/asr-config/asr-config"
+              ],
+    "window":  {
+                   "navigationBarBackgroundColor":  "#F2F2F7",
+                   "navigationBarTitleText":  "AI 验房师",
+                   "navigationBarTextStyle":  "black",
+                   "backgroundColor":  "#F2F2F7"
+               },
+    "tabBar":  {
+                   "custom":  true,
+                   "color":  "#8E8E93",
+                   "selectedColor":  "#007AFF",
+                   "backgroundColor":  "#FFFFFF",
+                   "list":  [
+                                {
+                                    "pagePath":  "pages/index/index",
+                                    "text":  "工作台"
+                                },
+                                {
+                                    "pagePath":  "pages/mine/mine",
+                                    "text":  "我的"
+                                }
+                            ]
+               },
+    "usingComponents":  {
+                            "global-tabbar":  "/components/global-tabbar/global-tabbar"
+                        },
+    "sitemapLocation":  "sitemap.json",
+    "style":  "v2"
+}

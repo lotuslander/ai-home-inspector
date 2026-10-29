@@ -1,0 +1,62 @@
+<view class="page">
+  <view class="card">
+    <view class="sub-title">整改总览</view>
+    <view class="stat-row">
+      <view class="st"><view class="st-num">{{total}}</view><view class="st-lbl">总问题</view></view>
+      <view class="st"><view class="st-num" style="color:#34C759">{{done.length}}</view><view class="st-lbl">已整改</view></view>
+      <view class="st"><view class="st-num" style="color:#007AFF">{{rate}}%</view><view class="st-lbl">整改率</view></view>
+      <view class="st"><view class="st-num" style="color:#FF3B30">{{overdueCount}}</view><view class="st-lbl">超期</view></view>
+    </view>
+    <view class="btn-primary" style="margin-top:20rpx;text-align:center;" bindtap="genSummary">📋 生成整改闭环确认单</view>
+    <view class="btn-ghost" style="margin-top:16rpx;text-align:center;" bindtap="genVisitSheet">🚗 复检上门任务单（按客户分组）</view>
+  </view>
+  <!-- 按报告分组：一次上门一个客户 -->
+  <view class="tip" wx:if="{{groups.length}}">上门复检共 {{groups.length}} 户，点卡片查看该户待复检明细</view>
+  <view class="card group-card" wx:for="{{groups}}" wx:key="reportNo" data-key="{{item.reportNo}}|{{item.community}}|{{item.room}}" bindtap="pickGroup">
+    <view class="row-between">
+      <view class="p-name">🏠 {{item.community}} {{item.room}}</view>
+      <view class="tag {{item.overdue?'tag-bad':'tag-warn'}}">{{item.overdue?item.overdue+'项超期':item.items.length+'项待检'}}</view>
+    </view>
+    <view class="muted" style="margin-top:8rpx;">报告 {{item.reportNo}} · {{item.date}}{{item.clientName?' · '+item.clientName:''}}</view>
+  </view>
+  <view class="tip" wx:if="{{list.length}}">共 {{list.length}} 项待整改，整改后二次上门复检拍照确认</view>
+  <view class="card" wx:for="{{list}}" wx:key="index">
+    <view class="row-between">
+      <view class="p-name">{{item.name}}</view>
+      <view class="tag {{item.overdue?'tag-bad':'tag-warn'}}">{{item.overdue?'已超期':'剩'+item.daysLeft+'天'}}</view>
+    </view>
+    <view class="muted" style="margin-top:8rpx;">{{item.community}} {{item.room}} · {{item.reportNo}} · {{item.date}}</view>
+    <view class="muted" wx:if="{{item.location}}">📍 {{item.location}}</view>
+    <view class="muted" wx:if="{{item.fix}}">🔧 {{item.fix}}</view>
+    <!-- 前后照片对比 -->
+    <view class="photo-compare" wx:if="{{item.photos.length||item.recheckPhotos.length}}">
+      <view class="pc-item">
+        <view class="pc-label">整改前</view>
+        <image wx:if="{{item.photos.length}}" src="{{item.photos[0].url || item.photos[0]}}" class="pc-img" data-idx="{{index}}" bindtap="viewBefore" mode="aspectFill"/>
+        <view wx:else class="pc-empty">未拍照</view>
+      </view>
+      <view class="pc-arrow">→</view>
+      <view class="pc-item">
+        <view class="pc-label">复检后</view>
+        <image wx:if="{{item.recheckPhotos.length}}" src="{{item.recheckPhotos[0].url || item.recheckPhotos[0]}}" class="pc-img" data-idx="{{index}}" bindtap="viewAfter" mode="aspectFill"/>
+        <view wx:else class="pc-empty">待复检</view>
+      </view>
+    </view>
+    <view class="row-between" style="margin-top:16rpx;">
+      <view class="btn-ghost flex1" data-idx="{{index}}" bindtap="viewOriginal">查看详情</view>
+      <view class="ai-btn" style="margin:0 8rpx;background:#F0F7FF;color:#007AFF;" data-idx="{{index}}" bindtap="aiCompare">AI对比</view>
+      <view class="btn-primary flex1" style="margin-left:8rpx;" data-idx="{{index}}" bindtap="recheck">复检确认</view>
+    </view>
+  </view>
+  <view class="empty" wx:if="{{empty}}">暂无待整改项 🎉</view>
+  <!-- 已整改完成 -->
+  <view class="done-header" wx:if="{{done.length}}">已整改完成（{{done.length}}项）</view>
+  <view class="card done-card" wx:for="{{done}}" wx:key="index">
+    <view class="row-between">
+      <view class="p-name">{{item.name}}</view>
+      <view class="tag tag-ok">已闭环</view>
+    </view>
+    <view class="muted" style="margin-top:8rpx;">{{item.community}} {{item.room}} · 复检日期 {{item.recheckDate||'—'}}</view>
+  </view>
+</view>
+<global-tabbar/>

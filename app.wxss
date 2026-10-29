@@ -1,0 +1,49 @@
+/* app.wxss - iOS 克制感全局样式 */
+page {
+  background: #F2F2F7;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", sans-serif;
+  font-size: 30rpx; color: #000; line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+.card { background: #fff; border-radius: 20rpx; padding: 28rpx; margin: 16rpx; }
+.btn-primary { background: #007AFF; color: #fff; border-radius: 44rpx; font-size: 32rpx; font-weight: 600; padding: 22rpx 0; text-align: center; }
+.btn-primary:active { opacity: 0.85; }
+.btn-warn { background: #FF9500; color: #fff; border-radius: 44rpx; font-size: 32rpx; font-weight: 600; padding: 22rpx 0; text-align: center; }
+.btn-warn:active { opacity: 0.85; }
+.btn-ghost { background: #E9E9EB; color: #007AFF; border-radius: 44rpx; font-size: 30rpx; font-weight: 500; padding: 20rpx 0; text-align: center; }
+.btn-ghost:active { background: #D1D1D6; }
+.title { font-size: 38rpx; font-weight: 700; color: #000; letter-spacing: -0.5rpx; }
+.subtitle { font-size: 28rpx; color: #3C3C43; font-weight: 600; }
+.muted { color: #8E8E93; font-size: 25rpx; }
+.tag { display: inline-block; font-size: 21rpx; font-weight: 500; padding: 4rpx 14rpx; border-radius: 8rpx; }
+.tag-ok { background: #E8F5EC; color: #34C759; }
+.tag-warn { background: #FFF4E5; color: #FF9500; }
+.tag-bad { background: #FFEBEB; color: #FF3B30; }
+.tag-info { background: #E5F0FF; color: #007AFF; }
+.progress-track { height: 10rpx; background: #E9E9EB; border-radius: 5rpx; overflow: hidden; }
+.progress-fill { height: 100%; background: #007AFF; border-radius: 5rpx; }
+.empty { text-align: center; color: #8E8E93; padding: 80rpx 0; font-size: 27rpx; }
+.row-sep { height: 1rpx; background: #E5E5EA; margin-left: 28rpx; }
+.row-between { display: flex; justify-content: space-between; align-items: center; }
+.flex1 { flex: 1; }
+.center { text-align: center; }
+.sub-title { font-size: 30rpx; font-weight: 700; margin-bottom: 12rpx; }
+/* ===== 现场模式：户外烈日高对比 ===== */
+.field-mode { background: #000; min-height: 100vh; }
+.field-mode .card { background: #1C1C1E; }
+.field-mode .title, .field-mode .sub-title, .field-mode .cat-title, .field-mode .case-title, .field-mode .p-name, .field-mode .r-name { color: #fff; }
+.field-mode .muted { color: #A0A0A8; }
+.field-mode input { background: #2C2C2E; color: #fff; }
+.field-mode .type-tip { background: #1A2A3F; color: #4DA3FF; }
+.field-mode .status-dot { background: #2C2C2E; }
+.field-mode .item, .field-mode .prob { border-color: #2C2C2E; }
+.field-mode .loc-chip { background: #2C2C2E; color: #E0E0E6; }
+.field-mode .quick-chip { background: #1A2A3F; color: #4DA3FF; }
+.field-mode .metric-tip { background: #33291A; color: #FFB340; }
+.field-mode .guide-card { background: #1A2A3F; }
+.field-mode .gs-text { color: #E0E0E6; }
+.field-mode .empty { color: #8E8E93; }
+
+/* ===== 全局底部栏留白（防止内容被tabbar遮挡） ===== */
+.page, .container { padding-bottom: 180rpx; }
+.tabbar-space { height: 160rpx; }

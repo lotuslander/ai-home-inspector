@@ -1,0 +1,19 @@
+.page{padding-bottom:40rpx;}
+.sub-title{font-weight:700;margin-bottom:8rpx;}
+.muted{font-size:24rpx;color:#8E8E93;}
+.packed-badge{background:#F2F2F7;color:#8E8E93;font-size:22rpx;padding:8rpx 20rpx;border-radius:24rpx;}
+.packed-badge.done{background:#E8F5EC;color:#34C759;}
+.progress-track{height:12rpx;background:#F2F2F7;border-radius:6rpx;margin-top:16rpx;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#007AFF,#34C759);border-radius:6rpx;transition:width .3s;}
+.group-title{font-size:28rpx;font-weight:700;margin-bottom:12rpx;}
+.tool-row{display:flex;align-items:flex-start;padding:14rpx 0;border-bottom:1rpx solid #F2F2F7;}
+.tool-row:last-child{border-bottom:none;}
+.tool-row.checked .tool-name{color:#34C759;}
+.tool-check{font-size:34rpx;width:56rpx;color:#C7C7CC;flex-shrink:0;}
+.tool-row.checked .tool-check{color:#34C759;}
+.tool-body{flex:1;}
+.tool-name{font-size:28rpx;font-weight:600;}
+.tool-must{font-size:18rpx;color:#FF9500;border:1rpx solid #FFD9A0;border-radius:6rpx;padding:0 8rpx;margin-left:8rpx;}
+.tool-need{font-size:23rpx;color:#8E8E93;margin-top:4rpx;}
+.btn-grid{display:flex;gap:16rpx;padding:0 16rpx;margin-top:24rpx;}
+.btn-grid .btn-ghost,.btn-grid .btn-primary{flex:1;text-align:center;}

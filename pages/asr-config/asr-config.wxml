@@ -1,0 +1,46 @@
+<view class="page">
+  <view class="card">
+    <view class="sub-title">🎙️ 语音引擎（ASR）</view>
+    <view class="muted" style="margin-bottom:20rpx;">现场口述 → 语音转文字，再由AI归档到验房清单。接口由你自己申请，Key只存本机。</view>
+    <view class="field">
+      <view class="f-label">接口类型</view>
+      <view class="type-row">
+        <view class="type-btn {{form.type==='dashscope'?'on':''}}" data-t="dashscope" bindtap="setType">通义(阿里云)</view>
+        <view class="type-btn {{form.type==='openai'?'on':''}}" data-t="openai" bindtap="setType">OpenAI兼容</view>
+        <view class="type-btn {{form.type==='custom'?'on':''}}" data-t="custom" bindtap="setType">自定义</view>
+      </view>
+    </view>
+    <view class="field">
+      <view class="f-label">接口地址 apiUrl</view>
+      <input class="f-input" value="{{form.apiUrl}}" bindinput="onUrl" placeholder="{{urlPh}}"/>
+    </view>
+    <view class="field">
+      <view class="f-label">API Key</view>
+      <input class="f-input" value="{{form.apiKey}}" bindinput="onKey" password placeholder="sk-... 只存本机"/>
+    </view>
+    <view class="field">
+      <view class="f-label">模型名 model</view>
+      <input class="f-input" value="{{form.model}}" bindinput="onModel" placeholder="{{modelPh}}"/>
+    </view>
+    <view class="tip-box">
+      <view class="tip-line">· 通义：apiUrl 填 <text class="tip-ex">https://dashscope.aliyuncs.com/api/v1/services/audio/asr/recognition</text>，模型填 <text class="tip-ex">paraformer-realtime-v2</text>，在阿里云百炼申请Key</view>
+      <view class="tip-line">· OpenAI兼容：apiUrl 填 <text class="tip-ex">https://api.openai.com/v1/audio/transcriptions</text>，模型填 <text class="tip-ex">whisper-1</text>；国内厂商按各自文档填</view>
+      <view class="tip-line">· 录音分段（约60秒/段）自动转写，只上传本机音频，不做云端存储</view>
+    </view>
+    <view class="guide-box" bindtap="toggleGuide">
+      <view class="guide-title">📖 怎么申请语音识别Key？（点开看步骤）</view>
+      <view class="guide-body" wx:if="{{showGuide}}">
+        <view class="guide-step">1. 注册阿里云/阿里云百炼（阿里云官网 → 百炼平台），或任意提供"语音识别/音频转写"接口的国内厂商（讯飞、腾讯云、百度智能云等）</view>
+        <view class="guide-step">2. 在控制台找到"语音识别/Paraformer"服务，开通后创建API-KEY（形如 sk-开头）</view>
+        <view class="guide-step">3. 把Key、接口地址、模型名填到上面并点"测试接口"，录3秒说话验证</view>
+        <view class="guide-step">4. 验证通过点"保存"，即可在"现场记录"和清单"说一句"里口述验房</view>
+      </view>
+    </view>
+    <view class="btn-row">
+      <view class="btn-ghost flex1" bindtap="testAsr">测试接口</view>
+      <view class="btn-primary flex1" bindtap="save">保存配置</view>
+    </view>
+    <view class="muted center" style="margin-top:16rpx;" bindtap="clearCfg">清除语音引擎配置</view>
+  </view>
+  <global-tabbar/>
+</view>

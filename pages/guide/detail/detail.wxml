@@ -1,0 +1,38 @@
+<view class="page">
+  <view class="card">
+    <view class="title">{{model.name}}</view>
+    <view class="muted" style="margin-top:8rpx;">跟着下面步骤申请，5分钟搞定</view>
+  </view>
+
+  <view class="card">
+    <view class="t-strong">📋 申请步骤</view>
+    <view class="step" wx:for="{{model.steps}}" wx:key="*this">{{item}}</view>
+  </view>
+
+  <view class="card">
+    <view class="t-strong">⚙️ 小程序里要填的</view>
+    <view class="kv-row">
+      <text class="kv-label">接口地址：</text>
+      <text class="kv-val" bindtap="copyEndpoint">{{model.endpoint}}</text>
+    </view>
+    <view class="kv-row">
+      <text class="kv-label">模型名：</text>
+      <text class="kv-val">{{model.model}}</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="t-strong">🎁 免费额度</view>
+    <view class="muted">{{model.free}}</view>
+  </view>
+
+  <view class="card" wx:if="{{model.tips}}">
+    <view class="t-strong">💡 提示</view>
+    <view class="muted">{{model.tips}}</view>
+  </view>
+
+  <view class="card tip-card" bindtap="copyUrl">
+    <view class="t-strong">👉 点这里复制申请链接，去浏览器打开</view>
+  </view>
+</view>
+<global-tabbar/>

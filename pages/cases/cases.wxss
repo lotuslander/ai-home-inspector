@@ -1,0 +1,11 @@
+.filter-bar { display: flex; gap: 12rpx; padding: 16rpx; white-space: nowrap; }
+.f-item { background: #fff; padding: 12rpx 24rpx; border-radius: 24rpx; font-size: 26rpx; color: #8E8E93; display: inline-block; flex-shrink: 0; }
+.f-item.active { background: #007AFF; color: #fff; font-weight: 600; }
+.sys-bar { margin-top: -8rpx; }
+.case-title { font-size: 30rpx; font-weight: 600; }
+.search-box { padding: 16rpx; }
+.my-card { background: #F0F7FF; border: 1rpx solid #D6E9FF; }
+.my-chips { display: flex; flex-wrap: wrap; gap: 10rpx; }
+.my-chip { font-size: 23rpx; color: #007AFF; background: #fff; padding: 8rpx 20rpx; border-radius: 24rpx; border: 1rpx solid #D6E9FF; }
+.search-input { background: #fff; border-radius: 20rpx; padding: 16rpx 24rpx; font-size: 26rpx; }
+.sys-tag { display: inline-block; font-size: 20rpx; color: #007AFF; background: #F0F7FF; padding: 4rpx 16rpx; border-radius: 16rpx; margin-top: 10rpx; }

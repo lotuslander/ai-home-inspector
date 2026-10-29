@@ -1,0 +1,13 @@
+<view class="page">
+  <view class="tip">在下方手写区域签名，确认后用于正式报告</view>
+  <view class="sign-wrap">
+    <canvas canvas-id="signCanvas" id="signCanvas" class="sign-board"
+      bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"/>
+    <view class="sign-hint">✍️ 请在此处签名</view>
+  </view>
+  <view class="row-between" style="padding:0 16rpx;">
+    <view class="btn-ghost flex1" bindtap="clear">清除重写</view>
+    <view class="btn-primary flex1" style="margin-left:16rpx;" bindtap="confirm">确认签名</view>
+  </view>
+</view>
+<global-tabbar/>

@@ -1,0 +1,59 @@
+<view class="page {{fieldMode?'field-mode':''}}">
+  <view class="progress-track"><view class="progress-fill" style="width:{{progress}}%"></view></view>
+  <view class="type-tip" wx:if="{{typeTip}}">💡 {{typeTip}} · 已检 {{doneCount}} 项</view>
+  <!-- 检测前置条件提示：新手高频坑，需提前准备 -->
+  <view class="prep-tip">
+    <view class="prep-title">📋 进场前记得：</view>
+    <view class="prep-items">
+      <text class="prep-item">闭水试验需提前24h蓄水</text>
+      <text class="prep-item">打压需现场有水源</text>
+      <text class="prep-item">带强光手电查暗角</text>
+    </view>
+  </view>
+  <!-- 房间快捷选择 -->
+  <view class="room-quick">
+    <view class="room-chip {{currentRoom===item?'active':''}}" wx:for="{{rooms}}" wx:key="*this" data-room="{{item}}" bindtap="quickRoom">{{item}}</view>
+  </view>
+  <!-- 单条口述：按住说话，自动归入当前房间 -->
+  <view class="voice-bar">
+    <view class="voice-hold {{voiceOn?'hold-on':''}}" bindtouchstart="voiceStart" bindtouchend="voiceEnd">
+      {{voiceOn ? '🎙️ 正在听… 松开结束' : '🎤 说一句（按住说话，自动填入清单）'}}
+    </view>
+    <view class="voice-pending" wx:if="{{voicePending>0}}" bindtap="goVoiceReview">⚠ {{voicePending}}条口述待归类 ›</view>
+  </view>
+  <view class="room-tip" wx:if="{{currentRoom}}">📍 当前在：{{currentRoom}} · 该房间重点分类已置顶（其它分类仍可继续查）</view>
+  <!-- 引导式下一步按钮 -->
+  <view class="next-room-btn" wx:if="{{currentRoom}}" bindtap="nextRoom">
+    ✅ 这个房间查完了，去下一个房间 →
+  </view>
+  <view class="cat" wx:for="{{cats}}" wx:key="id" wx:for-item="cat">
+    <view class="cat-title">{{cat.icon}} {{cat.name}} <text class="cat-room" wx:if="{{cat.roomFocus}}">📍本房间</text><text class="cat-focus" wx:if="{{cat.focus}}">★重点</text>
+      <text class="cat-left" wx:if="{{cat.left>0}}">还剩{{cat.left}}项</text>
+      <text class="cat-done" wx:else>✓已查完</text>
+    </view>
+    <view class="item" wx:for="{{cat.items}}" wx:key="id" wx:for-item="it">
+      <view class="row-between" data-id="{{it.id}}" data-cat="{{cat.id}}" bindtap="goDetail">
+        <view>
+          <view>{{it.name}}<text class="risk-tag risk-{{it.risk}}" wx:if="{{it.risk!=='low'}}">{{it.risk==='high'?'高':'中'}}</text></view>
+          <view class="metric-tip" wx:if="{{it.metricTip}}">📏 {{it.metricTip}}</view>
+        </view>
+        <view class="status-dot {{it.status}}">
+          <text wx:if="{{it.status==='ok'}}">✓</text>
+          <text wx:if="{{it.status==='mid'}}">△</text>
+          <text wx:if="{{it.status==='bad'}}">!</text>
+        </view>
+      </view>
+      <!-- 快速打勾按钮 -->
+      <view class="quick-mark">
+        <view class="qm qm-ok" data-id="{{it.id}}" data-cat="{{cat.id}}" data-status="ok" catchtap="quickMark">✓ 合格</view>
+        <view class="qm qm-mid" data-id="{{it.id}}" data-cat="{{cat.id}}" data-status="mid" catchtap="quickMark">△ 关注</view>
+        <view class="qm qm-bad" data-id="{{it.id}}" data-cat="{{cat.id}}" data-status="bad" catchtap="quickMark">! 问题</view>
+        <view class="qm qm-detail" data-id="{{it.id}}" data-cat="{{cat.id}}" catchtap="goDetail">详细 ›</view>
+      </view>
+      <!-- AI识别出来的问题描述显示在当条下面 -->
+      <view class="ai-note" wx:if="{{it.note}}" wx:for-item="it">{{it.note}}</view>
+      <view class="measure-btn" wx:if="{{it.metrics}}" data-id="{{it.id}}" data-cat="{{cat.id}}" catchtap="measure">测数值 ›</view>
+    </view>
+  </view>
+</view>
+<global-tabbar/>

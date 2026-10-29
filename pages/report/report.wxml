@@ -1,0 +1,112 @@
+<view class="page">
+  <view class="card">
+    <view class="row-between">
+      <view>
+        <view class="title">{{current.community}} {{current.room}}</view>
+        <view class="muted">编号 {{reportNo}} · {{current.date}}</view>
+        <view class="muted" style="font-size:20rpx;color:#34C759;margin-top:4rpx;">✓ 本报告已验真</view>
+        <view class="muted" style="font-size:20rpx;color:#007AFF;margin-top:2rpx;">🔒 防伪码：{{antiCode}} · 业主可凭此码核验</view>
+      </view>
+      <view class="inspector">
+        <view class="insp-avatar">{{inspector.name[0]}}</view>
+        <view class="insp-name">{{inspector.name}}</view>
+        <view class="insp-sub">{{inspector.company||'独立验房师'}}</view>
+        <view class="insp-cert" wx:if="{{inspector.certNo}}">{{inspector.certOrg}}·{{inspector.certNo}}</view>
+      </view>
+    </view>
+    <view class="row-between" style="margin-top:20rpx;">
+      <view class="tag tag-bad">问题 {{badCount}}</view>
+      <view class="tag tag-warn">关注 {{midCount}}</view>
+      <view class="tag tag-bad">高风险 {{highCount}}</view>
+      <view class="tag tag-ok">合格 {{doneCount - badCount - midCount}}</view>
+      <view class="tag tag-info">已检 {{doneCount}}</view>
+    </view>
+    <view class="grade-bar" wx:if="{{grade}}" style="background:{{grade.color}}1A;border-left:6rpx solid {{grade.color}};">
+      <view class="grade-lbl" style="color:{{grade.color}};">综合评级：{{grade.label}}（{{grade.grade}}级）</view>
+      <view class="grade-desc">{{grade.desc}}</view>
+      <view class="grade-reasons" wx:if="{{grade.reasons.length}}">
+        <view class="gr-item" wx:for="{{grade.reasons}}" wx:key="*this">· {{item}}</view>
+      </view>
+      <view class="grade-fix">👉 {{grade.fix}}</view>
+    </view>
+  </view>
+  <view class="card" wx:if="{{problems.length}}">
+    <view class="sub-title">🤖 AI 结论</view>
+    <view class="muted" wx:if="{{aiLoading}}">正在生成…</view>
+    <view wx:else>
+      <view class="ai-text" wx:if="{{aiText}}">{{aiText}}</view>
+      <view class="ai-btn" wx:else bindtap="aiConclusion">一键生成专业结论</view>
+    </view>
+  </view>
+  <view class="card" wx:if="{{problems.length}}">
+    <view class="sub-title">保险建议</view>
+    <view class="muted" style="font-size:24rpx;margin-bottom:12rpx">根据本次问题自动推荐适合的房屋保险</view>
+    <view class="ai-btn" bindtap="insuranceTip">查看保险建议</view>
+  </view>
+  <view class="card" wx:if="{{problems.length}}">
+    <view class="sub-title">多问题关联分析</view>
+    <view class="muted" style="font-size:24rpx;margin-bottom:12rpx">AI自动识别系统性风险</view>
+    <view class="ai-btn" style="background:#FFF0F0;color:#FF3B30;" bindtap="correlateAnalysis">🔍 运行关联分析</view>
+  </view>
+  <view class="card" wx:if="{{problems.length}}">
+    <view class="sub-title">问题与关注清单</view>
+    <view class="prob" wx:for="{{problems}}" wx:key="index">
+      <view class="prob-name">{{index+1}}. [{{item.category}}] {{item.name}} <text class="prob-type {{item.type==='bad'?'t-bad':'t-mid'}}">{{item.type==='bad'?'问题':'关注'}}</text></view>
+      <view class="muted" wx:if="{{item.location}}">📍 {{item.location}}</view>
+      <view class="muted" wx:if="{{item.metricTip}}">📏 实测：{{item.metricTip}}</view>
+      <view class="muted" wx:if="{{item.note}}">📝 {{item.note}}</view>
+      <view class="prob-photos" wx:if="{{item.photos.length}}">
+        <image wx:for="{{item.photos}}" wx:for-item="ph" wx:key="index" src="{{ph.url || ph}}" class="prob-photo" mode="aspectFill" data-src="{{ph.url || ph}}" bindtap="viewProbPhoto"/>
+        <view class="photo-time" wx:if="{{item.photos[0].shotAt}}">📸 拍摄于 {{item.photos[0].shotAt}}</view>
+      </view>
+    </view>
+    <view class="fix-btn" bindtap="genFixList">📋 生成整改通知单</view>
+    <view class="fix-btn" style="background:#E5F0FF;color:#007AFF;" bindtap="genFullReport">📄 生成完整报告文本</view>
+  </view>
+  <view class="empty" wx:else>本次未发现问题 🎉</view>
+  <view class="card">
+    <view class="sub-title">⚠️ 本次未检查项</view>
+    <view class="muted" style="margin-bottom:12rpx;">列明因条件限制未能检查的部位，保护双方权益</view>
+    <view class="unchecked-chips">
+      <view class="uc-chip {{unchecked.indexOf('屋面')>=0?'on':''}}" data-item="屋面" bindtap="toggleUncheck">屋面</view>
+      <view class="uc-chip {{unchecked.indexOf('吊顶内管道')>=0?'on':''}}" data-item="吊顶内管道" bindtap="toggleUncheck">吊顶内管道</view>
+      <view class="uc-chip {{unchecked.indexOf('关闭的阀门')>=0?'on':''}}" data-item="关闭的阀门" bindtap="toggleUncheck">关闭的阀门</view>
+      <view class="uc-chip {{unchecked.indexOf('隐蔽工程')>=0?'on':''}}" data-item="隐蔽工程" bindtap="toggleUncheck">隐蔽工程</view>
+      <view class="uc-chip {{unchecked.indexOf('电梯设备')>=0?'on':''}}" data-item="电梯设备" bindtap="toggleUncheck">电梯设备</view>
+      <view class="uc-chip {{unchecked.indexOf('室外公共区域')>=0?'on':''}}" data-item="室外公共区域" bindtap="toggleUncheck">室外公共区域</view>
+    </view>
+    <input placeholder="补充其他未检查项（选填）" value="{{uncheckedNote}}" bindinput="onUncheckNote" style="margin-top:12rpx;"/>
+  </view>
+  <view class="card">
+    <view class="sub-title">🏠 房屋保险建议</view>
+    <view class="muted" style="margin-bottom:12rpx;">验房师温馨提示：以下险种可覆盖日常使用风险，供业主参考</view>
+    <view class="ins-item"><text class="ins-name">家财险</text><text class="ins-desc">覆盖火灾、水管爆裂、盗抢等房屋主体损失</text></view>
+    <view class="ins-item"><text class="ins-name">漏水责任险</text><text class="ins-desc">自家漏水到楼下导致邻居损失的赔偿</text></view>
+    <view class="ins-item"><text class="ins-name">家电意外险</text><text class="ins-desc">水管、电路、燃气管道意外故障维修</text></view>
+    <view class="ins-item"><text class="ins-name">装修工程险</text><text class="ins-desc">正在装修的房子覆盖施工事故</text></view>
+  </view>
+  <view class="card" bindtap="goSign">
+    <view class="sub-title">✍️ 验房师签名</view>
+    <view class="muted" wx:if="{{!signature}}">点击签名（出具正式报告前必须签名确认）</view>
+    <image wx:else src="{{signature}}" class="sig-img" mode="aspectFit"/>
+  </view>
+  <!-- 业主现场签字：纯端侧下业主无法在自己手机上签，改为当场在验房师手机上签 -->
+  <view class="card">
+    <view class="sub-title">👤 业主当场签字确认</view>
+    <view class="muted" style="margin-bottom:12rpx;">验房结束后请业主在你手机上签字，签字会写入报告并随报告图片一起导出。</view>
+    <view class="muted" wx:if="{{ownerSignature}}">✅ 业主已签字</view>
+    <view class="row-between" style="margin-top:12rpx;">
+      <view class="btn-ghost flex1" bindtap="goOwnerSign">{{ownerSignature?'重新签字':'请业主签字'}}</view>
+      <view class="btn-ghost flex1" style="margin-left:16rpx;" wx:if="{{ownerSignature}}" bindtap="clearOwnerSign">清除签字</view>
+    </view>
+  </view>
+  <view class="btn-grid">
+    <view class="btn-primary" bindtap="exportImage">导出报告长图</view>
+    <view class="btn-ghost" bindtap="copyText">复制文本</view>
+    <view class="btn-ghost" bindtap="copyLink">复制核验码</view>
+    <view class="btn-primary" bindtap="saveReport">保存报告</view>
+  </view>
+  <view class="share-tip">📤 交付业主：点「导出报告长图」保存到相册（含全部问题、现场照片与双方签字；内容多时自动分成多页），在微信里直接把图片发给业主即可。</view>
+  <canvas type="2d" id="reportCanvas" class="report-canvas"></canvas>
+</view>
+<global-tabbar/>

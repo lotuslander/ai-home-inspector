@@ -1,0 +1,39 @@
+<view class="page">
+  <!-- 我的经验库：自动从验过的报告积累 -->
+  <view class="card my-card" wx:if="{{myCount}}">
+    <view class="row-between">
+      <view class="sub-title">🧠 我的经验库（{{myCount}}个小区）</view>
+    </view>
+    <view class="my-chips">
+      <view class="my-chip" wx:for="{{myTop}}" wx:key="name" data-name="{{item.name}}" bindtap="viewMyCase">{{item.name}} ×{{item.count}}</view>
+    </view>
+    <view class="muted" style="font-size:22rpx;margin-top:8rpx;">你每出一份报告，小程序自动沉淀高频问题，这是只属于你的实战数据</view>
+  </view>
+  <!-- 搜索 -->
+  <view class="search-box">
+    <input class="search-input" placeholder="🔍 搜案例：空鼓 / 渗漏 / 栏杆…" confirm-type="search" bindinput="onSearch"/>
+  </view>
+  <!-- 风险筛选 -->
+  <scroll-view scroll-x class="filter-bar">
+    <view class="f-item {{filter==='all'?'active':''}}" data-f="all" bindtap="setFilter">全部 {{all.length}}</view>
+    <view class="f-item {{filter==='high'?'active':''}}" data-f="high" bindtap="setFilter">高风险</view>
+    <view class="f-item {{filter==='mid'?'active':''}}" data-f="mid" bindtap="setFilter">中风险</view>
+    <view class="f-item {{filter==='low'?'active':''}}" data-f="low" bindtap="setFilter">低风险</view>
+  </scroll-view>
+  <!-- 系统类别筛选 -->
+  <scroll-view scroll-x class="filter-bar sys-bar">
+    <view class="f-item {{sys==='all'?'active':''}}" data-s="all" bindtap="setSys">全系统</view>
+    <view class="f-item {{sys===item?'active':''}}" wx:for="{{systems}}" wx:key="*this" data-s="{{item}}" bindtap="setSys">{{item}}</view>
+  </scroll-view>
+  <view class="card" wx:for="{{cases}}" wx:key="id" data-idx="{{index}}" bindtap="viewCase">
+    <view class="row-between">
+      <view class="case-title">{{item.title}}</view>
+      <view class="tag {{item.risk==='high'?'tag-bad':item.risk==='mid'?'tag-warn':'tag-ok'}}">{{item.riskText}}</view>
+    </view>
+    <view class="muted" style="margin-top:8rpx;">现场：{{item.scene}}</view>
+    <view class="muted" style="margin-top:4rpx;">{{item.norm}}</view>
+    <view class="sys-tag" wx:if="{{item.sys}}">{{item.sys}}</view>
+  </view>
+  <view class="empty" wx:if="{{!cases.length}}">没有匹配的案例，换个关键词试试</view>
+</view>
+<global-tabbar/>

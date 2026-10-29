@@ -1,0 +1,60 @@
+<view class="page">
+  <!-- 分类导航 -->
+  <view class="cat-bar">
+    <view class="cat-chip {{active==='privacy'?'active':''}}" data-k="privacy" bindtap="pick">隐私政策</view>
+    <view class="cat-chip {{active==='terms'?'active':''}}" data-k="terms" bindtap="pick">用户协议</view>
+    <view class="cat-chip {{active==='copyright'?'active':''}}" data-k="copyright" bindtap="pick">版权声明</view>
+    <view class="cat-chip {{active==='disclaimer'?'active':''}}" data-k="disclaimer" bindtap="pick">免责声明</view>
+  </view>
+
+  <!-- 隐私政策 -->
+  <view class="doc" wx:if="{{active==='privacy'}}">
+    <view class="doc-title">AI验房师 隐私政策</view>
+    <view class="doc-sec">一、数据存储原则</view>
+    <view class="doc-p">1. 本小程序采用纯端侧架构，你的全部数据（验房报告、客户档案、经验库、签名等）只保存在你自己的手机本地，本小程序不搭建云端服务器，不上传、不收集你的任何业务数据。</view>
+    <view class="doc-p">2. 大模型接口由你自己申请、自己配置，AI对话内容会直接发送给你填写的模型服务商（如阿里、字节、DeepSeek等），请知悉该服务商的隐私政策。</view>
+    <view class="doc-sec">二、不收集的信息</view>
+    <view class="doc-p">本小程序不收集你的位置信息、通讯录、相册内容（照片仅在你主动拍照时临时用于AI识别）、身份信息等敏感数据。</view>
+    <view class="doc-sec">三、数据权利</view>
+    <view class="doc-p">你可随时在"我的-其他设置"中导出备份全部数据，或"恢复出厂设置"一键删除本机全部数据。删除后不可恢复，请先导出备份。</view>
+    <view class="doc-sec">四、匿名数据</view>
+    <view class="doc-p">如你开启"匿名数据留档"，将去掉姓名、电话、房号后的问题统计保存在本机，仅用于小程序功能改进评估，不对外共享。</view>
+    <view class="doc-sec">五、政策更新</view>
+    <view class="doc-p">本政策更新时会在小程序内提示，继续使用即视为同意更新后的政策。</view>
+  </view>
+
+  <!-- 用户协议 -->
+  <view class="doc" wx:if="{{active==='terms'}}">
+    <view class="doc-title">AI验房师 用户协议</view>
+    <view class="doc-sec">一、服务内容</view>
+    <view class="doc-p">本小程序为实体验房师提供现场检测引导、规范速查、AI问答、报告生成、复检闭环、客户管理等工具。AI生成内容仅作辅助参考，最终专业判断由验房师本人负责。</view>
+    <view class="doc-sec">二、账号与配置</view>
+    <view class="doc-p">本小程序无需注册账号即可使用。AI功能需要你自行申请并配置大模型API Key，Key仅保存在本机，请勿在公用设备使用，因Key泄露产生的费用损失由使用者自行承担。</view>
+    <view class="doc-sec">三、使用规范</view>
+    <view class="doc-p">1. 你应具备合法的验房从业资质，并独立对出具的每一份报告的专业性与法律后果负责。</view>
+    <view class="doc-p">2. 不得利用本小程序从事虚假验房、伪造报告、欺诈消费者等违法行为。</view>
+    <view class="doc-p">3. 报告防伪码用于核验真伪，伪造报告者将承担相应法律责任。</view>
+    <view class="doc-sec">四、知识产权</view>
+    <view class="doc-p">本小程序代码、内置规范知识库、案例库、界面设计的著作权归开发者所有，未经许可不得复制、传播或用于商业用途。</view>
+  </view>
+
+  <!-- 版权声明 -->
+  <view class="doc" wx:if="{{active==='copyright'}}">
+    <view class="doc-title">AI验房师 版权声明</view>
+    <view class="doc-p">1. 本小程序（含界面、代码、图标、内置规范条文整理、案例库、术语库、检测方法库等全部内容）著作权归AI验房师开发者所有，受《中华人民共和国著作权法》保护。</view>
+    <view class="doc-p">2. 内置规范条文摘录自公开发布的工程建设国家标准/行业标准，仅用于验房从业者学习与工作参考，版权归原发布机关所有。</view>
+    <view class="doc-p">3. 未经书面许可，任何人不得复制、修改、反编译、镜像、传播或用于商业运营本小程序及其内容。</view>
+    <view class="doc-p">4. 验房师使用本小程序出具的报告，其报告内容著作权归出具报告的验房师所有。</view>
+  </view>
+
+  <!-- 免责声明 -->
+  <view class="doc" wx:if="{{active==='disclaimer'}}">
+    <view class="doc-title">AI验房师 免责声明</view>
+    <view class="doc-p">1. 本小程序为验房师专业工具，AI识别、评级、条文匹配等自动生成内容仅作辅助参考，不构成专业鉴定意见。所有结论须经验房师本人现场复核并承担专业责任。</view>
+    <view class="doc-p">2. 验房属于外观与功能查验，不替代结构安全鉴定、室内空气检测等需专门资质的检测项目。涉及重大争议时，建议委托有资质的第三方检测机构。</view>
+    <view class="doc-p">3. 本小程序提供的规范条文为精选摘要，不保证覆盖全部现行条文；引用前请核对最新发布版本。</view>
+    <view class="doc-p">4. 因大模型API为第三方服务，其输出可能不准确或中断，由此产生的损失本小程序不承担责任。</view>
+    <view class="doc-p">5. 使用本小程序即视为已阅读并同意本声明。</view>
+  </view>
+</view>
+<global-tabbar/>

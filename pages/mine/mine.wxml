@@ -1,0 +1,68 @@
+<view class="page">
+  <!-- 1. 个人资料卡片 -->
+  <view class="profile">
+    <view class="avatar">{{defaultInitial}}<image src="/assets/logo.png" class="avatar-logo" mode="aspectFit"/></view>
+    <view class="p-name">{{user.name}}</view>
+    <view class="p-sub">{{user.company||'独立验房师'}}</view>
+    <view class="p-cert" wx:if="{{user.certNo}}">🎓 {{user.certOrg}} · {{user.certNo}}</view>
+    <view class="row-between" style="margin-top:16rpx;width:100%;">
+      <view class="btn-ghost" style="flex:1;margin-right:12rpx;" bindtap="editCert">编辑资质</view>
+      <view class="btn-primary" style="flex:1;" bindtap="goCard">电子名片</view>
+    </view>
+  </view>
+
+  <!-- 2. 数据统计卡片 -->
+  <view class="card">
+    <view class="sub-title">📊 数据统计</view>
+    <view class="stat-card">
+      <view class="s"><view class="s-num">{{reportCount}}</view><view class="s-lbl">累计报告</view></view>
+      <view class="s"><view class="s-num">{{monthCount}}</view><view class="s-lbl">本月</view></view>
+      <view class="s"><view class="s-num">{{monthRecheck}}</view><view class="s-lbl">待复检</view></view>
+    </view>
+  </view>
+
+  <!-- 3. 我的业务卡片 -->
+  <view class="card">
+    <view class="sub-title">💼 我的业务</view>
+    <view class="menu-item" bindtap="goHistory">🗂️ 历史报告</view>
+    <view class="menu-item" bindtap="goClients">👥 客户档案</view>
+    <view class="menu-item" bindtap="goRecheck">🔄 复检跟踪</view>
+  </view>
+
+  <!-- 4. 专业工具卡片 -->
+  <view class="card">
+    <view class="sub-title">🧰 专业工具</view>
+    <view class="menu-item" bindtap="goNorms">📖 国标条文</view>
+    <view class="menu-item" bindtap="detectRegion">📍 地区标准 <text class="tag tag-ok" wx:if="{{region}}">{{region}}</text><text class="tag tag-warn" wx:else>未设置</text></view>
+  </view>
+
+  <!-- 5. 设置卡片 -->
+  <view class="card">
+    <view class="sub-title">⚙️ 大模型配置</view>
+    <view class="form-label">接口地址</view>
+    <input class="form-input" placeholder="如：https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions" value="{{llmUrl}}" bindinput="onLlmUrl"/>
+    <view class="form-label">API Key</view>
+    <input class="form-input" placeholder="粘贴你的API Key" value="{{llmKey}}" bindinput="onLlmKey" password/>
+    <view class="btn-row">
+      <view class="btn-test" bindtap="testLlm">测试连接</view>
+      <view class="btn-save" bindtap="saveLlm">保存</view>
+    </view>
+    <view class="key-sec-hint">🔒 API Key 仅保存在本机，对话内容会发送给你填写的模型服务商；请勿在公用设备使用，换设备需重新配置。</view>
+    <view class="btn-ghost" style="margin-top:12rpx;text-align:center;color:#FF3B30;" bindtap="clearLlmKey">🗑️ 清除已保存的API Key</view>
+    <view class="menu-item" bindtap="goGuide" style="margin-top:16rpx;">📖 不知道怎么申请？点这里看教程</view>
+    <view class="menu-item" bindtap="goAsrConfig" style="margin-top:8rpx;">🎙️ 语音引擎（ASR）配置 <text class="tag {{asrReady?'tag-ok':'tag-warn'}}">{{asrReady?'已配置':'未配置'}}</text></view>
+  </view>
+
+  <view class="card">
+    <view class="sub-title">⚙️ 其他设置</view>
+    <view class="menu-item">☀️ 现场模式（户外高对比） <switch checked="{{darkMode}}" bindchange="toggleDark"/></view>
+    <view class="menu-item">📊 匿名数据留档 <switch checked="{{dataConsent}}" bindchange="toggleConsent"/></view>
+    <view class="menu-item" bindtap="exportData">📤 导出备份</view>
+    <view class="menu-item" bindtap="feedback">📮 使用反馈</view>
+    <view class="menu-item" bindtap="goPolicies">📜 协议与声明</view>
+    <view class="menu-item" bindtap="clearTask" style="color:#FF3B30;">🗑️ 结束当前任务</view>
+    <view class="menu-item" bindtap="resetAll" style="color:#FF3B30;">⚠️ 恢复出厂设置</view>
+  </view>
+</view>
+
+<view class="version">AI 验房师 v1.0 · 让实体验房师更专业</view>

@@ -1,0 +1,31 @@
+.profile { text-align: center; padding: 40rpx 0 20rpx; }
+.avatar { width: 120rpx; height: 120rpx; background: #007AFF; color: #fff; border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 48rpx; font-weight: 700; }
+.p-name { font-size: 36rpx; font-weight: 700; margin-top: 16rpx; }
+.p-sub { color: #8E8E93; font-size: 26rpx; }
+.stat-card { display: flex; justify-content: space-around; }
+.s { text-align: center; }
+.s-num { font-size: 40rpx; font-weight: 700; }
+.s-lbl { font-size: 22rpx; color: #8E8E93; }
+.menu-item { padding: 28rpx 0; border-bottom: 1rpx solid #E5E5EA; font-size: 30rpx; display: flex; justify-content: space-between; align-items: center; }
+.menu-item:last-child { border: none; }
+.version{text-align:center;color:#8E8E93;font-size:22rpx;padding:40rpx 0;}
+.p-cert{color:#8E8E93;font-size:22rpx;margin-top:8rpx;}
+.topcat{display:flex;align-items:center;margin-top:12rpx;}
+.tc-name{width:180rpx;font-size:24rpx;color:#3C3C43;flex-shrink:0;}
+.tc-bar{flex:1;height:16rpx;background:#F2F2F7;border-radius:8rpx;overflow:hidden;margin:0 12rpx;}
+.tc-fill{height:100%;background:linear-gradient(90deg,#007AFF,#AF52DE);border-radius:8rpx;}
+.tc-fill-exp{background:linear-gradient(90deg,#FF9500,#FF3B30);}
+.tc-num{font-size:22rpx;color:#8E8E93;width:70rpx;text-align:right;}
+
+.page{padding-bottom:120rpx;}
+
+.avatar-logo{ position:absolute; bottom:-10rpx; right:-10rpx; width:60rpx; height:60rpx; border-radius:50%; border:4rpx solid #fff; }
+
+.form-label{ font-size:24rpx; color:#666; margin:16rpx 0 8rpx; }
+.form-input{ background:#f2f2f7; border-radius:12rpx; padding:16rpx; font-size:26rpx; }
+.btn-row{ display:flex; gap:16rpx; margin-top:20rpx; }
+.btn-test{ flex:1; background:#fff; border:2rpx solid #007AFF; color:#007AFF; text-align:center; padding:20rpx; border-radius:12rpx; font-size:28rpx; }
+.btn-save{ flex:1; background:#007AFF; color:#fff; text-align:center; padding:20rpx; border-radius:12rpx; font-size:28rpx; }
+
+/* API Key 安全提示（原来缺样式，提示文字和正文混在一起不醒目） */
+.key-sec-hint { margin-top: 16rpx; font-size: 22rpx; line-height: 1.6; color: #8E8E93; background: #F2F2F7; border-radius: 12rpx; padding: 16rpx; }
